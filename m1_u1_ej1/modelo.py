@@ -59,7 +59,7 @@ def calcular():
 
 
 # ----- FUNCION DE CONSULTA -----
-def consultar(tree):
+def consultar(tree, a_val, b_val, c_val):
     item = tree.item(tree.selection())
     conexion = conectar_base()
     cursor = conexion.cursor()
@@ -68,10 +68,9 @@ def consultar(tree):
     sql = "SELECT * FROM compras WHERE id = ?;"
     cursor.execute(sql, datos)
     la_lista = cursor.fetchall()
-    return la_lista[0][1], la_lista[0][2], la_lista[0][3]
-    # a_val.set(la_lista[0][1])
-    # b_val.set(la_lista[0][2])
-    # c_val.set(la_lista[0][3])
+    a_val.set(la_lista[0][1])
+    b_val.set(la_lista[0][2])
+    c_val.set(la_lista[0][3])
 
 
 # ----- FUNCION DE MODIFICACION -----

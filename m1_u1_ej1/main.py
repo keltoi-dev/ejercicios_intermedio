@@ -5,7 +5,6 @@ from tkinter import ttk
 from modelo import (
     conectar_base,
     hacer_tabla,
-    consulta_base,
     alta,
     calcular,
     consultar,
@@ -13,14 +12,6 @@ from modelo import (
     borrar,
     actualizar_treeview,
 )
-
-
-def carga_entry(tree):
-    producto, cantidad, precio = consultar(tree)
-    a_val.set(producto)
-    b_val.set(cantidad)
-    c_val.set(precio)
-    t_val.set(calcular())
 
 
 try:
@@ -87,7 +78,9 @@ boton_alta = Button(
 )
 boton_alta.grid(row=6, column=1)
 
-boton_consulta = Button(root, text="Consultar", command=lambda: carga_entry(tree))
+boton_consulta = Button(
+    root, text="Consultar", command=lambda: consultar(tree, a_val, b_val, c_val)
+)
 boton_consulta.grid(row=7, column=1)
 
 boton_borrar = Button(root, text="Borrar", command=lambda: t_val.set(borrar(tree)))
