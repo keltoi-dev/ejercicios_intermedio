@@ -7,8 +7,6 @@ from tkinter import Button
 from tkinter import ttk
 
 from modelo import (
-    conectar_base,
-    hacer_tabla,
     alta,
     calcular,
     consultar,
@@ -16,13 +14,6 @@ from modelo import (
     borrar,
     actualizar_treeview,
 )
-
-
-try:
-    conexion = conectar_base()
-    hacer_tabla(conexion)
-except:
-    print("La base ya ha sido creada")
 
 
 # ##############################################

@@ -29,6 +29,13 @@ def consulta_base():
     return la_lista
 
 
+try:
+    conexion = conectar_base()
+    hacer_tabla(conexion)
+except:
+    print("La base ya ha sido creada")
+
+
 # ----- FUNCION DE ALTA -----
 def alta(producto, cantidad, precio, tree):
     cadena = producto
