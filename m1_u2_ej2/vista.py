@@ -7,8 +7,8 @@ from tkinter import ttk
 from tkinter.messagebox import showinfo
 from tkcalendar import DateEntry
 import os
-from modelo import create_list, create_record, close_app
-from modelo import delete_record, modify_record, set_entry
+from modelo import create_record, close_app
+from modelo import delete_record, modify_record
 from modelo import search_record, update_treeview, consult_record
 from modelo import conect_database, create_table
 
@@ -42,7 +42,7 @@ def base_window(window):
 
     Label(
         window, text="GESTION DE NOMINA DE EMPLEADOS", bg="#B9F582", font="Bold"
-    ).grid(row=0, column=0, columnspan=2, sticky="w")
+    ).grid(row=0, column=0, columnspan=2, sticky="w" + "e")
 
     # ----- DEFINICIONN DE VARIABLES -----
     var_dni, var_cuil = StringVar(), StringVar()
@@ -63,35 +63,26 @@ def base_window(window):
         frame_menu,
         text="ALTA",
         width=15,
-        command=lambda: create_record(create_list(), tree),
+        command=lambda: set_entry(
+            create_record(create_list(), l_status, tree, var_filtro)
+        ),
     )
     btn_alta.grid(row=1, column=0, padx=9, pady=8)
     btn_baja = Button(
         frame_menu,
         text="BAJA",
         width=15,
-        command=lambda: delete_record(create_list(), tree, l_status),
+        command=lambda: set_entry(
+            delete_record(create_list(), tree, l_status, var_filtro)
+        ),
     )
     btn_baja.grid(row=2, column=0, padx=2, pady=9)
     btn_modificacion = Button(
         frame_menu,
         text="MODIFICACION",
         width=15,
-        command=lambda: modify_record(
-            create_list(
-                var_dni,
-                var_cuil,
-                var_nombre,
-                var_apellido,
-                var_domicilio,
-                var_fnacimiento,
-                var_falta,
-                var_obra,
-                var_art,
-                var_jornal,
-            ),
-            tree,
-            l_status,
+        command=lambda: set_entry(
+            modify_record(create_list(), tree, l_status, var_filtro)
         ),
     )
     btn_modificacion.grid(row=3, column=0, padx=2, pady=9)
@@ -99,22 +90,7 @@ def base_window(window):
         frame_menu,
         text="LIMPIAR",
         width=15,
-        command=lambda: set_entry(
-            [["" for _ in range(11)] for _ in range(1)],
-            var_dni,
-            var_cuil,
-            var_nombre,
-            var_apellido,
-            var_domicilio,
-            var_fnacimiento,
-            var_falta,
-            var_obra,
-            var_art,
-            var_jornal,
-            l_status,
-            e_dni,
-            e_cuil,
-        ),
+        command=lambda: set_entry([["" for _ in range(11)] for _ in range(1)]),
     )
     btn_consulta.grid(row=4, column=0, padx=2, pady=9)
     btn_cerrar = Button(
@@ -186,7 +162,7 @@ def base_window(window):
         text="Buscar",
         width=6,
         bg="#a1a1a1",
-        command=lambda: search_record(var_dni.get(), l_status),
+        command=lambda: set_entry(search_record(var_dni.get(), l_status)),
     )
     btn_buscar.grid(row=1, column=2, sticky="w")
 
@@ -225,11 +201,11 @@ def base_window(window):
     tree.heading("col4", text="OBRA ASIGNADA")
     tree.heading("col5", text="JORNAL ($)")
     tree.grid(row=1, column=0, columnspan=3)
-    tree.bind("<ButtonRelease-1>", lambda: consult_record(tree))
+    tree.bind("<ButtonRelease-1>", lambda: set_entry(consult_record(tree)))
 
     # ----- LABEL DE STATUS -----
     l_status = Label(window, text="Ok.", bg="#B9F582")
-    l_status.grid(row=3, column=0, columnspan=2, sticky="w")
+    l_status.grid(row=3, column=0, columnspan=2, sticky="w" + "e")
 
     try:
         conexion = conect_database()
@@ -241,3 +217,43 @@ def base_window(window):
         )
 
     update_treeview(tree, var_filtro)
+
+    # ***** MANIPULACION DE DATOS *****
+    # ----- CREACION DE UNA LISTA PARA MOVIMIENTO DE LOS DATOS -----
+    def create_list():
+        data_list = [
+            var_dni.get(),
+            var_cuil.get(),
+            var_nombre.get(),
+            var_apellido.get(),
+            var_domicilio.get(),
+            var_fnacimiento.get(),
+            var_falta.get(),
+            var_obra.get().capitalize(),
+            var_art.get(),
+            var_jornal.get(),
+        ]
+        return data_list
+
+    # ----- SETEO DE LOS ENTRY -----
+    def set_entry(data_list: list):
+        var_dni.set(data_list[0][1])
+        var_cuil.set(data_list[0][2])
+        var_nombre.set(data_list[0][3])
+        var_apellido.set(data_list[0][4])
+        var_domicilio.set(data_list[0][5])
+        var_fnacimiento.set(data_list[0][6])
+        var_falta.set(data_list[0][7])
+        var_obra.set(data_list[0][8])
+        var_art.set(data_list[0][9])
+        var_jornal.set(data_list[0][10])
+        if not data_list[0][1]:
+            l_status.config(text="Ok.", background="#B9F582")
+            e_dni.config(state="normal")
+            e_cuil.config(state="normal")
+        else:
+            l_status.config(
+                text="Puede modificar o dar de baja al registro.", background="#B9F582"
+            )
+            e_dni.config(state="disabled")
+            e_cuil.config(state="disabled")

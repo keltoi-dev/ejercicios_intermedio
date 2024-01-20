@@ -42,19 +42,9 @@ def modify_table(sql: str, data: list):
     conexion.commit()
 
 
-# try:
-#     conexion = conect_database()
-#     create_table(conexion)
-#     l_status.config(text="Se ha creado correctamente la base de datos.")
-# except:
-#     l_status.config(
-#         text="La base de datos ya está creada. Se ha accedido correctamente."
-#     )
-
-
 # ***** FUNCIONES PARA ALTAS - BAJAS - MODIFICACIONES *****
 # ----- FUNCION ALTA DE REGISTRO -----
-def create_record(data: list, l_status, tree):
+def create_record(data: list, l_status, tree, var_filtro):
     if not data[0] or not data[1] or not data[2] or not data[3]:
         l_status.config(text="Complete todos los campos.", background="#FF5656")
     else:
@@ -68,12 +58,11 @@ def create_record(data: list, l_status, tree):
                         domicilio, f_nacimiento, f_alta, obra, art, jornal) 
                         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"""
                 modify_table(sql, data)
-                set_entry([["" for _ in range(11)] for _ in range(1)])
                 l_status.config(
                     text="Los datos han sido guardados correctamente.",
                     background="#B9F582",
                 )
-                update_treeview(tree)
+                update_treeview(tree, var_filtro)
             else:
                 l_status.config(
                     text="El DNI ingresado ya está cargado en la base de datos.",
@@ -85,10 +74,11 @@ def create_record(data: list, l_status, tree):
                 text="Verifique los datos ingresados.", background="#FF5656"
             )
             showerror("ATENCIÓN!!", "La informacion cargada es incorrecta.")
+    return [["" for _ in range(11)] for _ in range(1)]
 
 
 # ----- FUNCION DE BAJA DE REGISTRO -----
-def delete_record(data: list, tree, l_status):
+def delete_record(data: list, tree, l_status, var_filtro):
     if not data[0]:
         showerror("ATENCIÓN!!", "No se ha seleccionado ningún registro.")
         l_status.config(text="El campo DNI esta vacio.", background="#FF5656")
@@ -99,8 +89,7 @@ def delete_record(data: list, tree, l_status):
         )
         if option:
             modify_table(sql, (data[0],))
-            update_treeview(tree)
-            set_entry([["" for _ in range(11)] for _ in range(1)])
+            update_treeview(tree, var_filtro)
             l_status.config(
                 text="Los datos han sido eliminados correctamente.",
                 background="#B9F582",
@@ -110,10 +99,11 @@ def delete_record(data: list, tree, l_status):
                 text="Se ha cancelado la eliminación de los datos.",
                 background="#B9F582",
             )
+    return [["" for _ in range(11)] for _ in range(1)]
 
 
 # ----- FUNCION DE MODIFICACION DE REGISTROS -----
-def modify_record(data: list, tree, l_status):
+def modify_record(data: list, tree, l_status, var_filtro):
     if not data[0]:
         showerror("ATENCIÓN!!", "No se ha seleccionado ningún registro.")
         l_status.config(text="El campo DNI esta vacio.", background="#FF5656")
@@ -129,17 +119,18 @@ def modify_record(data: list, tree, l_status):
             for _ in range(2):
                 data.pop(0)
             modify_table(sql, data)
-            set_entry([["" for _ in range(11)] for _ in range(1)])
+            #            set_entry([["" for _ in range(11)] for _ in range(1)])
             l_status.config(
                 text="Los datos han sido modificados correctamente.",
                 background="#B9F582",
             )
-            update_treeview(tree)
+            update_treeview(tree, var_filtro)
         else:
             l_status.config(
                 text="Se ha cancelado la modificación de los datos.",
                 background="#B9F582",
             )
+    return [["" for _ in range(11)] for _ in range(1)]
 
 
 # ***** FUNCIONES PARA CONSULTAS Y TREEVIEW *****
@@ -149,7 +140,7 @@ def consult_record(tree):
     data = int(item["text"])
     sql = "SELECT * FROM empleados WHERE id = " + str(data)
     data_list = update_table(sql)
-    set_entry(data_list)
+    return data_list
 
 
 # ----- FUNCION DE BUSQUEDA -----
@@ -166,7 +157,7 @@ def search_record(indice: str, l_status):
         l_status.config(
             text="La búsqueda se concreto correctamente.", background="#B9F582"
         )
-        set_entry(data_list)
+    return data_list
 
 
 # ----- FUNCION ACTUALIZAR TREEVIEW -----
@@ -197,71 +188,3 @@ def close_app(window):
     option = askokcancel("Cerrar la aplicación", "¿Está seguro que quiere salir?")
     if option:
         window.destroy()
-
-
-# ***** MANIPULACION DE DATOS *****
-# ----- CREACION DE UNA LISTA PARA MOVIMIENTO DE LOS DATOS -----
-def create_list(
-    var_dni,
-    var_cuil,
-    var_nombre,
-    var_apellido,
-    var_domicilio,
-    var_fnacimiento,
-    var_falta,
-    var_obra,
-    var_art,
-    var_jornal,
-):
-    data_list = [
-        var_dni.get(),
-        var_cuil.get(),
-        var_nombre.get(),
-        var_apellido.get(),
-        var_domicilio.get(),
-        var_fnacimiento.get(),
-        var_falta.get(),
-        var_obra.get().capitalize(),
-        var_art.get(),
-        var_jornal.get(),
-    ]
-    return data_list
-
-
-# ----- SETEO DE LOS ENTRY -----
-def set_entry(
-    data_list: list,
-    var_dni,
-    var_cuil,
-    var_nombre,
-    var_apellido,
-    var_domicilio,
-    var_fnacimiento,
-    var_falta,
-    var_obra,
-    var_art,
-    var_jornal,
-    l_status,
-    e_dni,
-    e_cuil,
-):
-    var_dni.set(data_list[0][1])
-    var_cuil.set(data_list[0][2])
-    var_nombre.set(data_list[0][3])
-    var_apellido.set(data_list[0][4])
-    var_domicilio.set(data_list[0][5])
-    var_fnacimiento.set(data_list[0][6])
-    var_falta.set(data_list[0][7])
-    var_obra.set(data_list[0][8])
-    var_art.set(data_list[0][9])
-    var_jornal.set(data_list[0][10])
-    if not data_list[0][1]:
-        l_status.config(text="Ok.", background="#B9F582")
-        e_dni.config(state="normal")
-        e_cuil.config(state="normal")
-    else:
-        l_status.config(
-            text="Puede modificar o dar de baja al registro.", background="#B9F582"
-        )
-        e_dni.config(state="disabled")
-        e_cuil.config(state="disabled")
