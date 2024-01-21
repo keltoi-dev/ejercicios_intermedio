@@ -201,7 +201,7 @@ def base_window(window):
     tree.heading("col4", text="OBRA ASIGNADA")
     tree.heading("col5", text="JORNAL ($)")
     tree.grid(row=1, column=0, columnspan=3)
-    tree.bind("<ButtonRelease-1>", lambda: set_entry(consult_record(tree)))
+    tree.bind("<ButtonRelease-1>", lambda event: set_entry(consult_record(tree)))
 
     # ----- LABEL DE STATUS -----
     l_status = Label(window, text="Ok.", bg="#B9F582")
