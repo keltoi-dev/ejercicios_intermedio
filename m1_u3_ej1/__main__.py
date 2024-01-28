@@ -1,7 +1,8 @@
 from tkinter import Tk
-import vista
+from vista import VentanaPrincipal
 
 if __name__ == "__main__":
     window = Tk()
-    vista.ventana(window)
+    vista = VentanaPrincipal(window)
+    vista.ventana()
     window.mainloop()
