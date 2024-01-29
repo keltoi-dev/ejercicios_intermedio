@@ -1,7 +1,8 @@
 from tkinter import Tk
-import vista
+from vista import MasterWindow
 
 if __name__ == "__main__":
     root = Tk()
-    vista.base_window(root)
+    vista = MasterWindow(root)
+    vista.base_window()
     root.mainloop()
