@@ -26,7 +26,7 @@ class ManageData:
             if (re.match(patron_dni, cadena_dni)) and (
                 re.match(patron_cuil, cadena_cuil)
             ):
-                sql = "SELECT * from empleados WHERE dni='" + data[0] + "';"
+                sql = "SELECT * from empleados WHERE dni='" + self.data[0] + "';"
                 data_list = base.update_table(sql)
                 if not data_list:
                     sql = """INSERT INTO empleados(dni, cuil, nombres, apellidos, 
@@ -44,12 +44,13 @@ class ManageData:
                         background="#FF5656",
                     )
                     showerror("ATENCIÓN!!", "El DNI ingresado ya fue cargado.")
+                return [["" for _ in range(11)] for _ in range(1)]
             else:
                 self.l_status.config(
                     text="Verifique los datos ingresados.", background="#FF5656"
                 )
                 showerror("ATENCIÓN!!", "La informacion cargada es incorrecta.")
-        return [["" for _ in range(11)] for _ in range(1)]
+                return [["a" for _ in range(11)] for _ in range(1)]
 
     # ----- FUNCION DE BAJA DE REGISTRO -----
     def delete_record(self, data: list):
@@ -123,8 +124,10 @@ class Auxiliares(ManageData):
         return data_list
 
     # ----- FUNCION DE BUSQUEDA -----
-    def search_record(self, indice: str):
-        sql = "SELECT * from empleados WHERE dni='" + indice + "';"
+    def search_record(self, indice: str, l_status):
+        self.indice = indice
+        self.l_status = l_status
+        sql = "SELECT * from empleados WHERE dni='" + self.indice + "';"
         data_list = base.update_table(sql)
         if not data_list:
             self.l_status.config(

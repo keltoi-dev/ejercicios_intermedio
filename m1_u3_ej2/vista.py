@@ -33,7 +33,7 @@ class MasterWindow:
                 """
 
         # ***** VISTA Y CONTROL *****
-        self.window.title("Evaluacion final - Python inicial")
+        self.window.title("Practicando POO - Python intermedio")
         # self.indow.geometry("810x573")
         self.window.resizable(False, False)
         ruta = os.getcwd() + os.sep + "img" + os.sep
@@ -73,28 +73,30 @@ class MasterWindow:
             frame_menu,
             text="ALTA",
             width=15,
-            command=lambda: set_entry(modelo.create_record(create_list())),
+            command=lambda: vista.set_entry(modelo.create_record(vista.create_list())),
         )
-        btn_alta.grid(row=1, column=0, padx=9, pady=8)
+        btn_alta.grid(row=1, column=0, padx=2, pady=9)
         btn_baja = Button(
             frame_menu,
             text="BAJA",
             width=15,
-            command=lambda: set_entry(modelo.delete_record(create_list())),
+            command=lambda: vista.set_entry(modelo.delete_record(vista.create_list())),
         )
         btn_baja.grid(row=2, column=0, padx=2, pady=9)
         btn_modificacion = Button(
             frame_menu,
             text="MODIFICACION",
             width=15,
-            command=lambda: set_entry(modelo.modify_record(create_list())),
+            command=lambda: vista.set_entry(modelo.modify_record(vista.create_list())),
         )
         btn_modificacion.grid(row=3, column=0, padx=2, pady=9)
         btn_consulta = Button(
             frame_menu,
             text="LIMPIAR",
             width=15,
-            command=lambda: set_entry([["" for _ in range(11)] for _ in range(1)]),
+            command=lambda: vista.set_entry(
+                [["" for _ in range(11)] for _ in range(1)]
+            ),
         )
         btn_consulta.grid(row=4, column=0, padx=2, pady=9)
         btn_cerrar = Button(
@@ -169,7 +171,7 @@ class MasterWindow:
             text="Buscar",
             width=6,
             bg="#a1a1a1",
-            command=lambda: set_entry(aux.search_record(var_dni.get(), l_status)),
+            command=lambda: vista.set_entry(aux.search_record(var_dni.get(), l_status)),
         )
         btn_buscar.grid(row=1, column=2, sticky="w")
 
@@ -209,7 +211,7 @@ class MasterWindow:
         tree.heading("col5", text="JORNAL ($)")
         tree.grid(row=1, column=0, columnspan=3)
         tree.bind(
-            "<ButtonRelease-1>", lambda event: set_entry(aux.consult_record(tree))
+            "<ButtonRelease-1>", lambda event: vista.set_entry(aux.consult_record(tree))
         )
 
         # ----- LABEL DE STATUS -----
@@ -217,47 +219,100 @@ class MasterWindow:
         l_status.grid(row=3, column=0, columnspan=2, sticky="w" + "e")
 
         l_status.config(text=aux.conect_database())
+
+        # Instanciar objetos
         modelo = ManageData(l_status, tree, var_filtro)
+        vista = AuxVista(
+            var_dni,
+            var_cuil,
+            var_nombre,
+            var_apellido,
+            var_domicilio,
+            var_fnacimiento,
+            var_falta,
+            var_art,
+            var_obra,
+            var_jornal,
+            var_filtro,
+            l_status,
+            e_dni,
+            e_cuil,
+        )
 
         aux.update_treeview(tree, var_filtro)
 
-        # ***** MANIPULACION DE DATOS *****
-        # ----- CREACION DE UNA LISTA PARA MOVIMIENTO DE LOS DATOS -----
-        def create_list():
-            data_list = [
-                var_dni.get(),
-                var_cuil.get(),
-                var_nombre.get(),
-                var_apellido.get(),
-                var_domicilio.get(),
-                var_fnacimiento.get(),
-                var_falta.get(),
-                var_obra.get().capitalize(),
-                var_art.get(),
-                var_jornal.get(),
-            ]
-            return data_list
 
-        # ----- SETEO DE LOS ENTRY -----
-        def set_entry(data_list: list):
-            var_dni.set(data_list[0][1])
-            var_cuil.set(data_list[0][2])
-            var_nombre.set(data_list[0][3])
-            var_apellido.set(data_list[0][4])
-            var_domicilio.set(data_list[0][5])
-            var_fnacimiento.set(data_list[0][6])
-            var_falta.set(data_list[0][7])
-            var_obra.set(data_list[0][8])
-            var_art.set(data_list[0][9])
-            var_jornal.set(data_list[0][10])
+class AuxVista(MasterWindow):
+    def __init__(
+        self,
+        var_dni,
+        var_cuil,
+        var_nombre,
+        var_apellido,
+        var_domicilio,
+        var_fnacimiento,
+        var_falta,
+        var_art,
+        var_obra,
+        var_jornal,
+        var_filtro,
+        l_status,
+        e_dni,
+        e_cuil,
+    ):
+        self.var_dni = var_dni
+        self.var_cuil = var_cuil
+        self.var_nombre = var_nombre
+        self.var_apellido = var_apellido
+        self.var_domicilio = var_domicilio
+        self.var_fnacimiento = var_fnacimiento
+        self.var_falta = var_falta
+        self.var_art = var_art
+        self.var_obra = var_obra
+        self.var_jornal = var_jornal
+        self.var_filtro = var_filtro
+        self.l_status = l_status
+        self.e_dni = e_dni
+        self.e_cuil = e_cuil
+
+    # ***** MANIPULACION DE DATOS *****
+    # ----- CREACION DE UNA LISTA PARA MOVIMIENTO DE LOS DATOS -----
+    def create_list(self):
+        data_list = [
+            self.var_dni.get(),
+            self.var_cuil.get(),
+            self.var_nombre.get(),
+            self.var_apellido.get(),
+            self.var_domicilio.get(),
+            self.var_fnacimiento.get(),
+            self.var_falta.get(),
+            self.var_obra.get().capitalize(),
+            self.var_art.get(),
+            self.var_jornal.get(),
+        ]
+        return data_list
+
+    # ----- SETEO DE LOS ENTRY -----
+    def set_entry(self, data_list: list):
+        if data_list[0][1] != "a":
+            self.var_dni.set(data_list[0][1])
+            self.var_cuil.set(data_list[0][2])
+            self.var_nombre.set(data_list[0][3])
+            self.var_apellido.set(data_list[0][4])
+            self.var_domicilio.set(data_list[0][5])
+            self.var_fnacimiento.set(data_list[0][6])
+            self.var_falta.set(data_list[0][7])
+            self.var_obra.set(data_list[0][8])
+            self.var_art.set(data_list[0][9])
+            self.var_jornal.set(data_list[0][10])
             if not data_list[0][1]:
-                l_status.config(text="Ok.", background="#B9F582")
-                e_dni.config(state="normal")
-                e_cuil.config(state="normal")
+                self.l_status.config(text="Ok.", background="#B9F582")
+                self.e_dni.config(state="normal")
+                self.e_cuil.config(state="normal")
             else:
-                l_status.config(
+                self.l_status.config(
                     text="Puede modificar o dar de baja al registro.",
                     background="#B9F582",
                 )
-                e_dni.config(state="disabled")
-                e_cuil.config(state="disabled")
+                self.e_dni.config(state="disabled")
+                self.e_cuil.config(state="disabled")
