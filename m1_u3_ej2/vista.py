@@ -294,7 +294,6 @@ class AuxVista(MasterWindow):
 
     # ----- SETEO DE LOS ENTRY -----
     def set_entry(self, data_list: list):
-<<<<<<< HEAD
         if data_list[0][1] != "a":
             self.var_dni.set(data_list[0][1])
             self.var_cuil.set(data_list[0][2])
@@ -317,26 +316,3 @@ class AuxVista(MasterWindow):
                 )
                 self.e_dni.config(state="disabled")
                 self.e_cuil.config(state="disabled")
-=======
-        self.var_dni.set(data_list[0][1])
-        self.var_cuil.set(data_list[0][2])
-        self.var_nombre.set(data_list[0][3])
-        self.var_apellido.set(data_list[0][4])
-        self.var_domicilio.set(data_list[0][5])
-        self.var_fnacimiento.set(data_list[0][6])
-        self.var_falta.set(data_list[0][7])
-        self.var_obra.set(data_list[0][8])
-        self.var_art.set(data_list[0][9])
-        self.var_jornal.set(data_list[0][10])
-        if not data_list[0][1]:
-            self.l_status.config(text="Ok.", background="#B9F582")
-            self.e_dni.config(state="normal")
-            self.e_cuil.config(state="normal")
-        else:
-            self.l_status.config(
-                text="Puede modificar o dar de baja al registro.",
-                background="#B9F582",
-            )
-            self.e_dni.config(state="disabled")
-            self.e_cuil.config(state="disabled")
->>>>>>> 9da5d1437cfe321e81ad1c52739eb1382655b4b8
