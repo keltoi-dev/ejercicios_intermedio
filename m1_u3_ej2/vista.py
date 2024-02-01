@@ -23,13 +23,14 @@ class MasterWindow:
         info = """
                 Aplicación para el manejo de una base de datos con 
                 altas, bajas, modificaciones y consultas (CRUD); 
-                para una nómina de empleados con una gran variedad 
-                de datos.
+                para una nómina de empleados con una gran 
+                variedad de datos.
                 
                 AUTOR: Germán Fraga
 
-                Entrega final - Diplomatura Python 3 - Nivel inicial
-                26/12/2023
+                Practicando POO
+                Diplomatura Python 3 - Nivel intermedio
+                1/2/2024
                 """
 
         # ***** VISTA Y CONTROL *****
@@ -68,49 +69,32 @@ class MasterWindow:
         Label(frame_menu, text="MENU", bg="#a1a1a1", font="Bold").grid(
             row=0, column=0, sticky="w"
         )
-        wid = WidgetsWindows(frame_menu)
-        wid.boton_1(
+        wid_btn1 = WidgetsWindows(frame_menu)
+        wid_btn1.boton_1(
             "ALTA",
             lambda: vista.set_entry(modelo.create_record(vista.create_list())),
             1,
         )
-        # btn_alta = Button(
-        #     frame_menu,
-        #     text="ALTA",
-        #     width=15,
-        #     command=lambda: vista.set_entry(modelo.create_record(vista.create_list())),
-        # )
-        # btn_alta.grid(row=1, column=0, padx=2, pady=9)
-        btn_baja = Button(
-            frame_menu,
-            text="BAJA",
-            width=15,
-            command=lambda: vista.set_entry(modelo.delete_record(vista.create_list())),
+        wid_btn1.boton_1(
+            "BAJA",
+            lambda: vista.set_entry(modelo.delete_record(vista.create_list())),
+            2,
         )
-        btn_baja.grid(row=2, column=0, padx=2, pady=9)
-        btn_modificacion = Button(
-            frame_menu,
-            text="MODIFICACION",
-            width=15,
-            command=lambda: vista.set_entry(modelo.modify_record(vista.create_list())),
+        wid_btn1.boton_1(
+            "MODIFICACION",
+            lambda: vista.set_entry(modelo.modify_record(vista.create_list())),
+            3,
         )
-        btn_modificacion.grid(row=3, column=0, padx=2, pady=9)
-        btn_consulta = Button(
-            frame_menu,
-            text="LIMPIAR",
-            width=15,
-            command=lambda: vista.set_entry(
-                [["" for _ in range(11)] for _ in range(1)]
-            ),
+        wid_btn1.boton_1(
+            "LIMPIAR",
+            lambda: vista.set_entry([["" for _ in range(11)] for _ in range(1)]),
+            4,
         )
-        btn_consulta.grid(row=4, column=0, padx=2, pady=9)
-        btn_cerrar = Button(
-            frame_menu,
-            text="SALIR",
-            width=15,
-            command=lambda: aux.close_app(self.window),
+        wid_btn1.boton_1(
+            "SALIR",
+            lambda: aux.close_app(self.window),
+            5,
         )
-        btn_cerrar.grid(row=5, column=0, padx=2, pady=8)
 
         # ----- FRAME DE DATOS -----
         frame_datos = Frame(self.window, padx=10, pady=10, bd=1, relief="solid")
@@ -171,14 +155,12 @@ class MasterWindow:
         e_jornal = Entry(frame_datos, textvariable=var_jornal, width=15)
         e_jornal.grid(row=8, column=1)
 
-        btn_buscar = Button(
-            frame_datos,
-            text="Buscar",
-            width=6,
-            bg="#a1a1a1",
-            command=lambda: vista.set_entry(aux.search_record(var_dni.get(), l_status)),
+        wid_btn2 = WidgetsWindows(frame_datos)
+        wid_btn2.boton_2(
+            "Buscar",
+            lambda: vista.set_entry(aux.search_record(var_dni.get(), l_status)),
+            1,
         )
-        btn_buscar.grid(row=1, column=2, sticky="w")
 
         # ----- FRAME PARA TREEVIEW -----
         frame_tree = Frame(self.window, padx=10, pady=10, bd=0, relief="solid")
@@ -190,15 +172,14 @@ class MasterWindow:
         e_filtro = Entry(frame_tree, textvariable=var_filtro, width=80)
         e_filtro.grid(row=0, column=1)
 
-        btn_filtrar = Button(
-            frame_tree,
-            text="Filtrar",
-            bg="#a1a1a1",
-            command=lambda: aux.update_treeview(
+        wid_btn2 = WidgetsWindows(frame_tree)
+        wid_btn2.boton_2(
+            "Filtrar",
+            lambda: aux.update_treeview(
                 tree, var_filtro, var_filtro.get().capitalize()
             ),
+            0,
         )
-        btn_filtrar.grid(row=0, column=2, sticky="w")
 
         tree = ttk.Treeview(frame_tree)
         tree["columns"] = ("col1", "col2", "col3", "col4", "col5")
@@ -262,6 +243,19 @@ class WidgetsWindows(MasterWindow):
             command=self.instruction,
         )
         self.btn.grid(row=self.position, column=0, padx=2, pady=9)
+
+    def boton_2(self, text_btn, instruction, position):
+        self.text_btn = text_btn
+        self.instruction = instruction
+        self.position = position
+        btn_buscar = Button(
+            self.frame,
+            text=self.text_btn,
+            width=6,
+            bg="#a1a1a1",
+            command=self.instruction,
+        )
+        btn_buscar.grid(row=self.position, column=2, sticky="w")
 
 
 class AuxVista(MasterWindow):

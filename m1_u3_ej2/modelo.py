@@ -135,11 +135,12 @@ class Auxiliares(ManageData):
                 background="#ff1b1b",
             )
             showerror("ATENCIÓN!!", "Este DNI no existe en la base de datos")
+            return [["a" for _ in range(11)] for _ in range(1)]
         else:
             self.l_status.config(
                 text="La búsqueda se concreto correctamente.", background="#B9F582"
             )
-        return data_list
+            return data_list
 
     def conect_database(self):
         try:
