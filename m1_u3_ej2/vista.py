@@ -68,14 +68,19 @@ class MasterWindow:
         Label(frame_menu, text="MENU", bg="#a1a1a1", font="Bold").grid(
             row=0, column=0, sticky="w"
         )
-
-        btn_alta = Button(
-            frame_menu,
-            text="ALTA",
-            width=15,
-            command=lambda: vista.set_entry(modelo.create_record(vista.create_list())),
+        wid = WidgetsWindows(frame_menu)
+        wid.boton_1(
+            "ALTA",
+            lambda: vista.set_entry(modelo.create_record(vista.create_list())),
+            1,
         )
-        btn_alta.grid(row=1, column=0, padx=2, pady=9)
+        # btn_alta = Button(
+        #     frame_menu,
+        #     text="ALTA",
+        #     width=15,
+        #     command=lambda: vista.set_entry(modelo.create_record(vista.create_list())),
+        # )
+        # btn_alta.grid(row=1, column=0, padx=2, pady=9)
         btn_baja = Button(
             frame_menu,
             text="BAJA",
@@ -240,6 +245,23 @@ class MasterWindow:
         )
 
         aux.update_treeview(tree, var_filtro)
+
+
+class WidgetsWindows(MasterWindow):
+    def __init__(self, frame):
+        self.frame = frame
+
+    def boton_1(self, text_btn, instruction, position):
+        self.text_btn = text_btn
+        self.instruction = instruction
+        self.position = position
+        self.btn = Button(
+            self.frame,
+            text=self.text_btn,
+            width=15,
+            command=self.instruction,
+        )
+        self.btn.grid(row=self.position, column=0, padx=2, pady=9)
 
 
 class AuxVista(MasterWindow):
