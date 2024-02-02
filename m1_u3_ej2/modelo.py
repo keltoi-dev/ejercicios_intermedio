@@ -20,6 +20,7 @@ class ManageData:
             self.l_status.config(
                 text="Complete todos los campos.", background="#FF5656"
             )
+            return [["a" for _ in range(11)] for _ in range(1)]
         else:
             cadena_dni, cadena_cuil = self.data[0], self.data[1]
             patron_dni, patron_cuil = "^\d{7,8}$", "^\d{11}$"
