@@ -1,3 +1,6 @@
+# Practicando POO
+# Germán Fraga
+
 from tkinter import Tk
 from vista import MasterWindow
 

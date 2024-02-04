@@ -1,3 +1,6 @@
+# Practicando POO
+# Germán Fraga
+
 import sqlite3
 import os
 

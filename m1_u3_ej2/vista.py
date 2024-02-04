@@ -1,4 +1,4 @@
-# Evaluación final
+# Practicando POO
 # Germán Fraga
 
 from tkinter import Menu, Label, Button, Frame
@@ -8,8 +8,9 @@ from tkinter.messagebox import showinfo
 from tkcalendar import DateEntry
 import os
 
-from modelo import Auxiliares
+from aux_modelo import Auxiliares
 from modelo import ManageData
+from aux_vista import AuxVista
 
 aux = Auxiliares()
 
@@ -69,28 +70,28 @@ class MasterWindow:
         Label(frame_menu, text="MENU", bg="#a1a1a1", font="Bold").grid(
             row=0, column=0, sticky="w"
         )
-        wid_btn1 = WidgetsWindows(frame_menu)
-        wid_btn1.boton_1(
+        widget_1 = WidgetsWindows(frame_menu)
+        widget_1.boton_1(
             "ALTA",
             lambda: vista.set_entry(modelo.create_record(vista.create_list())),
             1,
         )
-        wid_btn1.boton_1(
+        widget_1.boton_1(
             "BAJA",
             lambda: vista.set_entry(modelo.delete_record(vista.create_list())),
             2,
         )
-        wid_btn1.boton_1(
+        widget_1.boton_1(
             "MODIFICACION",
             lambda: vista.set_entry(modelo.modify_record(vista.create_list())),
             3,
         )
-        wid_btn1.boton_1(
+        widget_1.boton_1(
             "LIMPIAR",
             lambda: vista.set_entry([["" for _ in range(11)] for _ in range(1)]),
             4,
         )
-        wid_btn1.boton_1(
+        widget_1.boton_1(
             "SALIR",
             lambda: aux.close_app(self.window),
             5,
@@ -119,6 +120,7 @@ class MasterWindow:
             text="* En el campo DNI y CUIL solo ingrese números sin ',' o '-'.",
             fg="#ff1b1b",
         ).grid(row=9, column=1, columnspan=6, sticky="w")
+        widget_2 = WidgetsWindows(frame_datos)
 
         e_dni = Entry(frame_datos, textvariable=var_dni, width=15)
         e_dni.grid(row=1, column=1)
@@ -130,24 +132,10 @@ class MasterWindow:
         e_apellido.grid(row=3, column=1, columnspan=5)
         e_direccion = Entry(frame_datos, textvariable=var_domicilio, width=80)
         e_direccion.grid(row=4, column=1, columnspan=5)
-        e_fnacimiento = DateEntry(
-            frame_datos,
-            width=15,
-            justify="center",
-            date_pattern="dd-mm-yyyy",
-            textvariable=var_fnacimiento,
-            foreground="#000000",
-        )
-        e_fnacimiento.grid(row=5, column=1)
-        e_falta = DateEntry(
-            frame_datos,
-            width=15,
-            justify="center",
-            date_pattern="dd-mm-yyyy",
-            textvariable=var_falta,
-            foreground="#000000",
-        )
-        e_falta.grid(row=5, column=5)
+
+        widget_2.date_in(var_fnacimiento, 1)
+        widget_2.date_in(var_falta, 5)
+
         e_obra = Entry(frame_datos, textvariable=var_obra, width=80)
         e_obra.grid(row=6, column=1, columnspan=5)
         e_art = Entry(frame_datos, textvariable=var_art, width=80)
@@ -155,8 +143,7 @@ class MasterWindow:
         e_jornal = Entry(frame_datos, textvariable=var_jornal, width=15)
         e_jornal.grid(row=8, column=1)
 
-        wid_btn2 = WidgetsWindows(frame_datos)
-        wid_btn2.boton_2(
+        widget_2.boton_2(
             "Buscar",
             lambda: vista.set_entry(aux.search_record(var_dni.get(), l_status)),
             1,
@@ -257,78 +244,15 @@ class WidgetsWindows(MasterWindow):
         )
         btn_buscar.grid(row=self.position, column=2, sticky="w")
 
-
-class AuxVista(MasterWindow):
-    def __init__(
-        self,
-        var_dni,
-        var_cuil,
-        var_nombre,
-        var_apellido,
-        var_domicilio,
-        var_fnacimiento,
-        var_falta,
-        var_art,
-        var_obra,
-        var_jornal,
-        var_filtro,
-        l_status,
-        e_dni,
-        e_cuil,
-    ):
-        self.var_dni = var_dni
-        self.var_cuil = var_cuil
-        self.var_nombre = var_nombre
-        self.var_apellido = var_apellido
-        self.var_domicilio = var_domicilio
-        self.var_fnacimiento = var_fnacimiento
-        self.var_falta = var_falta
-        self.var_art = var_art
-        self.var_obra = var_obra
-        self.var_jornal = var_jornal
-        self.var_filtro = var_filtro
-        self.l_status = l_status
-        self.e_dni = e_dni
-        self.e_cuil = e_cuil
-
-    # ***** MANIPULACION DE DATOS *****
-    # ----- CREACION DE UNA LISTA PARA MOVIMIENTO DE LOS DATOS -----
-    def create_list(self):
-        data_list = [
-            self.var_dni.get(),
-            self.var_cuil.get(),
-            self.var_nombre.get(),
-            self.var_apellido.get(),
-            self.var_domicilio.get(),
-            self.var_fnacimiento.get(),
-            self.var_falta.get(),
-            self.var_obra.get().capitalize(),
-            self.var_art.get(),
-            self.var_jornal.get(),
-        ]
-        return data_list
-
-    # ----- SETEO DE LOS ENTRY -----
-    def set_entry(self, data_list: list):
-        if data_list[0][1] != "a":
-            self.var_dni.set(data_list[0][1])
-            self.var_cuil.set(data_list[0][2])
-            self.var_nombre.set(data_list[0][3])
-            self.var_apellido.set(data_list[0][4])
-            self.var_domicilio.set(data_list[0][5])
-            self.var_fnacimiento.set(data_list[0][6])
-            self.var_falta.set(data_list[0][7])
-            self.var_obra.set(data_list[0][8])
-            self.var_art.set(data_list[0][9])
-            self.var_jornal.set(data_list[0][10])
-            if not data_list[0][1]:
-                self.l_status.config(text="Ok.", background="#B9F582")
-                self.e_dni.config(state="normal")
-                self.e_cuil.config(state="normal")
-            else:
-                self.l_status.config(
-                    text="Puede modificar o dar de baja al registro.",
-                    background="#B9F582",
-                )
-                self.e_dni.config(state="disabled")
-                self.e_cuil.config(state="disabled")
+    def date_in(self, data_var, position):
+        self.data_var = data_var
+        self.position = position
+        e_fecha = DateEntry(
+            self.frame,
+            width=15,
+            justify="center",
+            date_pattern="dd-mm-yyyy",
+            textvariable=self.data_var,
+            foreground="#000000",
+        )
+        e_fecha.grid(row=5, column=self.position)
