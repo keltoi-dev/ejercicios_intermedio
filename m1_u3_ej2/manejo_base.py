@@ -41,3 +41,7 @@ class ManageBase:
         self.cursor = self.conexion.cursor()
         self.cursor.execute(self.sql, self.data)
         self.conexion.commit()
+
+    def close_base(self):
+        self.cursor.close()
+        self.conexion.close()

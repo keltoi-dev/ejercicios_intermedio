@@ -3,6 +3,7 @@
 
 from manejo_base import ManageBase
 from tkinter.messagebox import showerror, askokcancel
+from verifica_campos import RegexCampos
 
 
 # ***** FUNCIONES PARA CONSULTAS Y TREEVIEW *****
@@ -10,6 +11,7 @@ from tkinter.messagebox import showerror, askokcancel
 class Auxiliares:
     def __init__(self):
         self.base = ManageBase()
+        self.control = RegexCampos()
 
     def consult_record(self, tree):
         self.tree = tree
@@ -23,20 +25,27 @@ class Auxiliares:
     def search_record(self, indice: str, l_status):
         self.indice = indice
         self.l_status = l_status
-        sql = "SELECT * from empleados WHERE dni='" + self.indice + "';"
-        data_list = self.base.update_table(sql)
-        if not data_list:
-            self.l_status.config(
-                text="No se encontró el DNI solicitado en la base de datos.",
-                background="#ff1b1b",
-            )
-            showerror("ATENCIÓN!!", "Este DNI no existe en la base de datos")
-            return [["a" for _ in range(11)] for _ in range(1)]
+        if self.control.verificar("^\d{7,8}$", self.indice):
+            sql = "SELECT * from empleados WHERE dni='" + self.indice + "';"
+            data_list = self.base.update_table(sql)
+            if not data_list:
+                self.l_status.config(
+                    text="No se encontró el DNI solicitado en la base de datos.",
+                    background="#FF5656",
+                )
+                showerror("ATENCIÓN!!", "Este DNI no existe en la base de datos")
+                return [["-" for _ in range(11)] for _ in range(1)]
+            else:
+                self.l_status.config(
+                    text="La búsqueda se concreto correctamente.", background="#B9F582"
+                )
+                return data_list
         else:
             self.l_status.config(
-                text="La búsqueda se concreto correctamente.", background="#B9F582"
+                text="Verifique los datos ingresados.", background="#FF5656"
             )
-            return data_list
+            showerror("ATENCIÓN!!", "La informacion cargada es incorrecta.")
+            return [["-" for _ in range(11)] for _ in range(1)]
 
     def conect_database(self):
         try:
@@ -74,4 +83,5 @@ class Auxiliares:
     def close_app(self, window):
         option = askokcancel("Cerrar la aplicación", "¿Está seguro que quiere salir?")
         if option:
+            self.base.close_base()
             window.destroy()

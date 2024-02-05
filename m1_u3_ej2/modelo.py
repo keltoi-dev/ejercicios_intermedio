@@ -49,7 +49,6 @@ class ManageData:
                     showerror("ATENCIÓN!!", "El DNI ingresado ya fue cargado.")
                 return [["" for _ in range(11)] for _ in range(1)]
             else:
-                print("Entro regex")
                 self.l_status.config(
                     text="Verifique los datos ingresados.", background="#FF5656"
                 )
