@@ -13,9 +13,7 @@ class Vehiculos:
 
 class Trenes(Vehiculos):
     def __init__(self, color, matricula, velocidad):
-        self.color = color
-        self.matricula = matricula
-        self.velocidad = velocidad
+        super(Trenes, self).__init__(color, matricula, velocidad)
 
 
 print("\n", "- autos -" * 5)
