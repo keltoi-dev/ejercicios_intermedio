@@ -31,8 +31,10 @@ class VentanaPrincipal:
         titulo.grid(row=0, column=0, columnspan=4, padx=1, pady=1, sticky="w" + "e")
 
         # Defino variables para tomar valores de campos de entrada
-        a_val, b_val, c_val = StringVar(), DoubleVar(), DoubleVar()
-        t_val = StringVar()
+        self.a_val, self.b_val, self.c_val = StringVar(), DoubleVar(), DoubleVar()
+        self.t_val = StringVar()
+        name_base = StringVar
+        type_base = StringVar
         w_ancho = 20
 
         producto = Label(self.root, text="Producto")
@@ -44,14 +46,31 @@ class VentanaPrincipal:
         l_total = Label(self.root, text="El total de la compra es:")
         l_total.grid(row=8, column=0, sticky="e", columnspan=3)
 
-        entrada1 = Entry(self.root, textvariable=a_val, width=w_ancho)
-        entrada1.grid(row=1, column=1)
-        entrada2 = Entry(self.root, textvariable=b_val, width=w_ancho)
-        entrada2.grid(row=2, column=1)
-        entrada3 = Entry(self.root, textvariable=c_val, width=w_ancho)
-        entrada3.grid(row=3, column=1)
-        e_total = Entry(self.root, textvariable=t_val)
+        n_base = Label(self.root, text="Nombre de la base")
+        n_base.grid(row=1, column=2, sticky="e")
+        t_base = Label(self.root, text="Tipo de base")
+        t_base.grid(row=2, column=2, sticky="e")
+
+        self.entrada1 = Entry(
+            self.root, textvariable=self.a_val, width=w_ancho, state="disabled"
+        )
+        self.entrada1.grid(row=1, column=1)
+        self.entrada2 = Entry(
+            self.root, textvariable=self.b_val, width=w_ancho, state="disabled"
+        )
+        self.entrada2.grid(row=2, column=1)
+        self.entrada3 = Entry(
+            self.root, textvariable=self.c_val, width=w_ancho, state="disabled"
+        )
+        self.entrada3.grid(row=3, column=1)
+        e_total = Entry(self.root, textvariable=self.t_val)
         e_total.grid(row=8, column=3)
+
+        entrada4 = Entry(self.root, textvariable=name_base, width=w_ancho)
+        entrada4.grid(row=1, column=3)
+
+        entrada5 = Entry(self.root, textvariable=type_base, width=w_ancho)
+        entrada5.grid(row=2, column=3)
 
         # --------------------------------------------------
         # TREEVIEW
@@ -69,46 +88,61 @@ class VentanaPrincipal:
         tree.heading("col3", text="precio")
         tree.grid(row=7, column=0, columnspan=4)
 
-        modelo = AlBaMo(tree)
+        self.modelo = AlBaMo(tree)
         aux = AuxiliaresABM(tree)
-        wv = WidgetView(self.root)
+        self.wv = WidgetView(self.root)
 
-        wv.boton_base(
+        self.wv.boton_base("Comenzar", lambda: self.botones_habilitar(aux), 3, 3)
+
+    def botones_habilitar(self, aux):
+        self.aux = aux
+        self.entrada1.config(state="normal")
+        self.entrada2.config(state="normal")
+        self.entrada3.config(state="normal")
+
+        self.wv.boton_base(
             "Alta",
-            lambda: t_val.set(modelo.alta(a_val.get(), b_val.get(), c_val.get())),
+            lambda: self.t_val.set(
+                self.modelo.alta(self.a_val.get(), self.b_val.get(), self.c_val.get())
+            ),
             0,
         )
 
-        wv.boton_base(
+        self.wv.boton_base(
             "Consultar",
-            lambda: modelo.consultar(a_val, b_val, c_val),
+            lambda: self.modelo.consultar(self.a_val, self.b_val, self.c_val),
             1,
         )
 
-        wv.boton_base(
+        self.wv.boton_base(
             "Borrar",
-            lambda: t_val.set(modelo.borrar()),
+            lambda: self.t_val.set(self.modelo.borrar()),
             2,
         )
 
-        wv.boton_base(
+        self.wv.boton_base(
             "Modificar",
-            lambda: t_val.set(modelo.modificar(a_val.get(), b_val.get(), c_val.get())),
+            lambda: self.t_val.set(
+                self.modelo.modificar(
+                    self.a_val.get(), self.b_val.get(), self.c_val.get()
+                )
+            ),
             3,
         )
 
-        t_val.set(aux.calcular())
-        aux.actualizar_treeview()
+        self.t_val.set(self.aux.calcular())
+        self.aux.actualizar_treeview()
 
 
 class WidgetView(VentanaPrincipal):
     def __init__(self, root):
         super(WidgetView, self).__init__(root)
 
-    def boton_base(self, texto, instruccion, posicion):
+    def boton_base(self, texto, instruccion, x, y=6):
         self.texto = texto
         self.instruccion = instruccion
-        self.posicion = posicion
+        self.x = x
+        self.y = y
 
-        btn_base = Button(self.root, text=self.texto, command=self.instruccion)
-        btn_base.grid(row=6, column=self.posicion, sticky="w" + "e")
+        self.btn_base = Button(self.root, text=self.texto, command=self.instruccion)
+        self.btn_base.grid(row=self.y, column=self.x, sticky="w" + "e")

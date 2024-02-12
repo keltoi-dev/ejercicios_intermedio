@@ -27,12 +27,13 @@ class AlBaMo:
             sql = "INSERT INTO compras(producto, cantidad, precio) VALUES (?, ?, ?)"
             base.guardar_base(sql, datos)
 
-            total = self.aux.calcular()
             print("Estoy en alta todo ok")
             self.aux.actualizar_treeview()
+
         else:
             print("error en campo producto")
-        return total
+
+        return self.aux.calcular()
 
     # ----- FUNCION DE CONSULTA -----
     def consultar(self, a_val, b_val, c_val):
