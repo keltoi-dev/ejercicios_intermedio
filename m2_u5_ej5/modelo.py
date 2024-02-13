@@ -1,22 +1,27 @@
 import re
-from base_datos import BaseDatos
+from base_datos import BaseDatos, DataBase
 from auxiliares import AuxiliaresABM
 
 # ##############################################
 # MODELO
 # ##############################################
 
-try:
-    base = BaseDatos()
-    base.hacer_tabla()
-except:
-    print("La base ya ha sido creada")
 
-
-class AlBaMo:
-    def __init__(self, tree):
+class Abmc:
+    def __init__(self, tree, nombre, tipo):
         self.tree = tree
-        self.aux = AuxiliaresABM(tree)
+        self.nombre = nombre
+        self.tipo = tipo
+
+        self.base = DataBase(self.nombre, self.tipo)
+        self.db = BaseDatos()
+        self.aux = AuxiliaresABM(tree, self.base)
+
+        try:
+            self.db.hacer_tabla()
+            print(self.nombre, self.tipo)
+        except:
+            print("La base ya ha sido creada")
 
     # ----- FUNCION DE ALTA -----
     def alta(self, a_val, b_val, c_val):
@@ -25,7 +30,7 @@ class AlBaMo:
         if re.match(patron, cadena):
             datos = (a_val, b_val, c_val)
             sql = "INSERT INTO compras(producto, cantidad, precio) VALUES (?, ?, ?)"
-            base.guardar_base(sql, datos)
+            self.db.guardar_base(sql, datos)
 
             print("Estoy en alta todo ok")
             self.aux.actualizar_treeview()
@@ -41,7 +46,7 @@ class AlBaMo:
         el_id = int(item["text"])
         datos = (el_id,)
         sql = "SELECT * FROM compras WHERE id = ?;"
-        la_lista = base.consulta_base(sql, datos)
+        la_lista = self.db.consulta_base(sql, datos)
         a_val.set(la_lista[0][1])
         b_val.set(la_lista[0][2])
         c_val.set(la_lista[0][3])
@@ -53,7 +58,7 @@ class AlBaMo:
 
         datos = (a_val, b_val, c_val, el_id)
         sql = "UPDATE compras SET producto = ?, cantidad = ?, precio = ? WHERE id = ?;"
-        base.guardar_base(sql, datos)
+        self.db.guardar_base(sql, datos)
         print("La seleccion fue modificada")
         total = self.aux.calcular()
         self.aux.actualizar_treeview()
@@ -66,7 +71,7 @@ class AlBaMo:
         el_id = int(item["text"])
         datos = (el_id,)
         sql = "DELETE FROM compras WHERE id = ?;"
-        base.guardar_base(sql, datos)
+        self.db.guardar_base(sql, datos)
 
         total = self.aux.calcular()
         print("La seleccion fue eliminada")

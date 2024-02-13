@@ -2,9 +2,18 @@ import sqlite3
 
 
 # CONEXION CON LA BASE
-class BaseDatos:
-    def __init__(self):
-        self.conexion = sqlite3.connect("m2_u2_database.db")
+class DataBase:
+    def __init__(self, nombre, tipo):
+        self.nombre = nombre
+        self.tipo = tipo
+        if self.tipo == "SQLite3":
+            self.conexion = sqlite3.connect(self.nombre + ".db")
+
+
+class BaseDatos(DataBase):
+
+    def __init__(self, conexion):
+        super(BaseDatos, self).__init__(conexion)
 
     def hacer_tabla(self):
         self.cursor = self.conexion.cursor()
