@@ -6,7 +6,6 @@ from tkinter import Button
 
 from tkinter import ttk
 
-from auxiliares import AuxiliaresABM
 from modelo import Abmc
 
 
@@ -138,10 +137,9 @@ class VentanaPrincipal:
                 3,
             )
 
-            self.modelo = Abmc(self.tree, self.name_base.get(), self.type_base.get())
-            self.aux = AuxiliaresABM(self.tree, self.name_base.get())
-            # self.t_val.set(self.aux.calcular())
-            # self.aux.actualizar_treeview()
+            self.modelo = Abmc(
+                self.tree, self.name_base.get(), self.type_base.get(), self.t_val
+            )
 
             self.entrada4.config(state="disabled")
             self.entrada5.config(state="disabled")

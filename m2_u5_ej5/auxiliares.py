@@ -2,23 +2,21 @@ from base_datos import BaseDatos
 
 
 class AuxiliaresABM:
-    def __init__(self, tree, nombre):
-        self.sql = "SELECT * FROM compras ORDER BY id DESC;"
+    def __init__(self, tree, db):
         self.tree = tree
-        self.nombre = nombre
-        self.base = BaseDatos(self.nombre)
+        self.base = db
 
     # ----- FUNCION CALCULAR TOTAL -----
     def calcular(self):
         total = 0
-        la_lista = self.base.consulta_base(self.sql)
+        la_lista = self.base.consulta_todo()
         for i in la_lista:
             total += i[2] * i[3]
         return total
 
     # ----- FUNCION ACTUALIZAR TREE -----
     def actualizar_treeview(self):
-        la_lista = self.base.consulta_base(self.sql)
+        la_lista = self.base.consulta_todo()
 
         records = self.tree.get_children()
         for element in records:
