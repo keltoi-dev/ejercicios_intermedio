@@ -191,7 +191,7 @@ class MasterWindow:
         l_status = Label(self.window, text="Ok.", bg="#B9F582")
         l_status.grid(row=3, column=0, columnspan=2, sticky="w" + "e")
 
-        l_status.config(text=aux.conect_database())
+        # l_status.config(text=aux.conect_database())
 
         # Instanciar objetos
         modelo = ManageData(l_status, tree, var_filtro)
@@ -219,7 +219,7 @@ class WidgetsWindows(MasterWindow):
     def __init__(self, frame):
         self.frame = frame
 
-    def boton_1(self, text_btn, instruction, position):
+    def boton_1(self, text_btn: str, instruction: str, position: int):
         self.text_btn = text_btn
         self.instruction = instruction
         self.position = position
@@ -231,7 +231,7 @@ class WidgetsWindows(MasterWindow):
         )
         self.btn.grid(row=self.position, column=0, padx=2, pady=9)
 
-    def boton_2(self, text_btn, instruction, position):
+    def boton_2(self, text_btn: str, instruction: str, position: int):
         self.text_btn = text_btn
         self.instruction = instruction
         self.position = position
@@ -244,7 +244,7 @@ class WidgetsWindows(MasterWindow):
         )
         btn_buscar.grid(row=self.position, column=2, sticky="w")
 
-    def date_in(self, data_var, position):
+    def date_in(self, data_var, position: int):
         self.data_var = data_var
         self.position = position
         e_fecha = DateEntry(

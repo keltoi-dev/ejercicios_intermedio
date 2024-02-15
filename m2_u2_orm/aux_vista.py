@@ -37,7 +37,7 @@ class AuxVista:
 
     # ***** MANIPULACION DE DATOS *****
     # ----- CREACION DE UNA LISTA PARA MOVIMIENTO DE LOS DATOS -----
-    def create_list(self):
+    def create_list(self) -> list:
         data_list = [
             self.var_dni.get(),
             self.var_cuil.get(),
