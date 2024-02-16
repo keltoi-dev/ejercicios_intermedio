@@ -35,7 +35,7 @@ class ManageData:
                         text="Los datos han sido guardados correctamente.",
                         background="#B9F582",
                     )
-                    self.aux.update_treeview(self.tree, self.var_filtro)
+                    self.aux.update_treeview(self.tree, self.var_filtro.get())
                 except:
                     self.l_status.config(
                         text="El DNI ingresado ya está cargado en la base de datos.",
@@ -62,7 +62,7 @@ class ManageData:
             )
             if option:
                 self.base.delete_row(self.data[0])
-                self.aux.update_treeview(self.tree, self.var_filtro)
+                self.aux.update_treeview(self.tree, self.var_filtro.get())
                 self.l_status.config(
                     text="Los datos han sido eliminados correctamente.",
                     background="#B9F582",
@@ -90,7 +90,7 @@ class ManageData:
                     text="Los datos han sido modificados correctamente.",
                     background="#B9F582",
                 )
-                self.aux.update_treeview(self.tree, self.var_filtro)
+                self.aux.update_treeview(self.tree, self.var_filtro.get())
             else:
                 self.l_status.config(
                     text="Se ha cancelado la modificación de los datos.",

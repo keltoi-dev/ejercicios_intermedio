@@ -31,7 +31,7 @@ class MasterWindow:
 
                 Practicando POO
                 Diplomatura Python 3 - Nivel intermedio
-                1/2/2024
+                16/2/2024
                 """
 
         # ***** VISTA Y CONTROL *****
@@ -162,8 +162,8 @@ class MasterWindow:
         wid_btn2 = WidgetsWindows(frame_tree)
         wid_btn2.boton_2(
             "Filtrar",
-            lambda: aux.update_treeview(
-                tree, var_filtro, var_filtro.get().capitalize()
+            lambda: vista.var_filtro.set(
+                aux.update_treeview(tree, var_filtro.get().capitalize())
             ),
             0,
         )
@@ -212,7 +212,7 @@ class MasterWindow:
             e_cuil,
         )
 
-        aux.update_treeview(tree, var_filtro)
+        aux.update_treeview(tree, var_filtro.get())
 
 
 class WidgetsWindows(MasterWindow):

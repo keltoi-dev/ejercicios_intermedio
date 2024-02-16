@@ -38,11 +38,15 @@ db.create_tables([Empleados])
 
 class ManageBase:
     def __init__(self):
-        self.empleados = Empleados()
+        pass
 
     # ----- CONULTA A LA BASE DE DATOS -----
     def update_table(self) -> list:
-        return self.empleados.select()
+        return Empleados.select()
+
+    def filter_table(self, data):
+        self.data = data
+        return Empleados.select().where(Empleados.obra == self.data)
 
     def search_one(self, data):
         self.data = data
@@ -66,17 +70,18 @@ class ManageBase:
     # ----- MODIFICACION DE LA BASE DE DATOS -----
     def save_row(self, data: list):
         self.data = data
-        self.empleados.dni = self.data[0]
-        self.empleados.cuil = self.data[1]
-        self.empleados.nombres = self.data[2]
-        self.empleados.apellidos = self.data[3]
-        self.empleados.domicilio = self.data[4]
-        self.empleados.f_nacimiento = self.data[5]
-        self.empleados.f_alta = self.data[6]
-        self.empleados.obra = self.data[7]
-        self.empleados.art = self.data[8]
-        self.empleados.jornal = self.data[9]
-        self.empleados.save()
+        empleado = Empleados()
+        empleado.dni = self.data[0]
+        empleado.cuil = self.data[1]
+        empleado.nombres = self.data[2]
+        empleado.apellidos = self.data[3]
+        empleado.domicilio = self.data[4]
+        empleado.f_nacimiento = self.data[5]
+        empleado.f_alta = self.data[6]
+        empleado.obra = self.data[7]
+        empleado.art = self.data[8]
+        empleado.jornal = self.data[9]
+        empleado.save()
 
     def delete_row(self, data):
         self.data = data
@@ -86,24 +91,13 @@ class ManageBase:
     def modify_row(self, data):
         self.data = data
         actualizar = Empleados.update(
-            nombres=self.data[3],
-            apellidos=self.data[4],
-            domicilio=self.data[5],
-            f_nacimiento=self.data[6],
-            f_alta=self.data[7],
-            obra=self.data[8],
-            art=self.data[9],
-            jornal=self.data[10],
+            nombres=self.data[2],
+            apellidos=self.data[3],
+            domicilio=self.data[4],
+            f_nacimiento=self.data[5],
+            f_alta=self.data[6],
+            obra=self.data[7],
+            art=self.data[8],
+            jornal=self.data[9],
         ).where(Empleados.dni == self.data[0])
         actualizar.execute()
-
-    # def modify_table(self, sql: str, data: list):
-    #     self.sql = sql
-    #     self.data = data
-    #     self.cursor = self.conexion.cursor()
-    #     self.cursor.execute(self.sql, self.data)
-    #     self.conexion.commit()
-
-    # def close_base(self):
-    #     self.cursor.close()
-    #     self.conexion.close()
