@@ -45,21 +45,37 @@ class ManageBase:
         return self.empleados.select()
 
     def search_one(self, data):
-        pass
+        self.data = data
+        self.data_list = []
+        items = Empleados.get(Empleados.dni == self.data)
+        self.data_list = [
+            items.id,
+            items.dni,
+            items.cuil,
+            items.nombres,
+            items.apellidos,
+            items.domicilio,
+            items.f_nacimiento,
+            items.f_alta,
+            items.obra,
+            items.art,
+            items.jornal,
+        ]
+        return [self.data_list]
 
     # ----- MODIFICACION DE LA BASE DE DATOS -----
     def save_row(self, data: list):
         self.data = data
-        self.empleados.dni = self.data[1]
-        self.empleados.cuil = self.data[2]
-        self.empleados.nombres = self.data[3]
-        self.empleados.apellidos = self.data[4]
-        self.empleados.domicilio = self.data[5]
-        self.empleados.f_nacimiento = self.data[6]
-        self.empleados.f_alta = self.data[7]
-        self.empleados.obra = self.data[8]
-        self.empleados.art = self.data[9]
-        self.empleados.jornal = self.data[10]
+        self.empleados.dni = self.data[0]
+        self.empleados.cuil = self.data[1]
+        self.empleados.nombres = self.data[2]
+        self.empleados.apellidos = self.data[3]
+        self.empleados.domicilio = self.data[4]
+        self.empleados.f_nacimiento = self.data[5]
+        self.empleados.f_alta = self.data[6]
+        self.empleados.obra = self.data[7]
+        self.empleados.art = self.data[8]
+        self.empleados.jornal = self.data[9]
         self.empleados.save()
 
     def delete_row(self, data):

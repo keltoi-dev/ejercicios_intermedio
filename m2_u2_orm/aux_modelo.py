@@ -18,7 +18,7 @@ class Auxiliares:
     def consult_record(self, tree) -> list:
         self.tree = tree
         item = self.tree.item(self.tree.selection())
-        data = int(item["text"])
+        data = item["values"][0]
         data_list = self.base.search_one(data)
         return data_list
 
@@ -27,8 +27,7 @@ class Auxiliares:
         self.indice = indice
         self.l_status = l_status
         if self.control.verificar("^\d{7,8}$", self.indice):
-            sql = "SELECT * from empleados WHERE dni='" + self.indice + "';"
-            data_list = self.base.update_table(sql)
+            data_list = self.base.search_one(self.indice)
             if not data_list:
                 self.l_status.config(
                     text="No se encontró el DNI solicitado en la base de datos.",
