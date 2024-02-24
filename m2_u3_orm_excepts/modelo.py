@@ -4,7 +4,7 @@
 from tkinter.messagebox import showerror, askokcancel
 from manejo_base import ManageBase
 from aux_modelo import Auxiliares
-from verifica_campos import RegexCampos
+from verifica_campos import RegexCampos, RegexError
 from peewee import IntegrityError
 
 
@@ -17,7 +17,6 @@ class ManageData:
         self.var_filtro = var_filtro
         self.aux = Auxiliares()
         self.base = ManageBase()
-        self.control = RegexCampos()
 
     def create_record(self, data: list) -> list:
         self.data = data
@@ -27,9 +26,12 @@ class ManageData:
             )
 
         else:
-            if self.control.verificar(
-                "^\d{7,8}$", self.data[0]
-            ) and self.control.verificar("^\d{11}$", self.data[1]):
+            try:
+                self.dni = RegexCampos("^\d{7,8}$", self.data[0], "Dni en alta")
+                self.cuil = RegexCampos("^\d{11}$", self.data[1], "CUIL en alta")
+                self.dni.verificar()
+                self.cuil.verificar()
+
                 try:
                     self.base.save_row(data)
                     self.l_status.config(
@@ -45,7 +47,8 @@ class ManageData:
                     )
                     showerror("ATENCIÓN!!", "El DNI ingresado ya fue cargado.")
 
-            else:
+            except RegexError as log:
+                log.guardar_error()
                 self.l_status.config(
                     text="Verifique los datos ingresados.", background="#FF5656"
                 )

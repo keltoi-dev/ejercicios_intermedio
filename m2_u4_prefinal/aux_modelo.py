@@ -2,20 +2,18 @@
 # Germán Fraga
 
 from manejo_base import ManageBase
-from tkinter.messagebox import showerror, askokcancel
-from verifica_campos import RegexCampos
+from verifica_campos import RegexCampos, RegexError
 
 
 # ***** FUNCIONES PARA CONSULTAS Y TREEVIEW *****
 
 
 class Auxiliares:
-    def __init__(self):
+    def __init__(self) -> None:
         self.base = ManageBase()
-        self.control = RegexCampos()
 
     # ----- FUNCION DE CONSULTA DESDE TREEVIEW -----
-    def consult_record(self, tree) -> list:
+    def consult_record(self, tree: object) -> list:
         self.tree = tree
         item = self.tree.item(self.tree.selection())
         data = item["values"][0]
@@ -23,32 +21,38 @@ class Auxiliares:
         return data_list
 
     # ----- FUNCION DE BUSQUEDA -----
-    def search_record(self, indice: str, l_status) -> list:
+    def search_record(self, indice: str, l_status: object) -> tuple:
         self.indice = indice
         self.l_status = l_status
-        if self.control.verificar("^\d{7,8}$", self.indice):
+
+        try:
+            self.dni = RegexCampos("^\d{7,8}$", self.indice, "Busqueda de dni")
+            self.dni.verificar()
+
             try:
                 data_list = self.base.search_one(self.indice)
                 self.l_status.config(
                     text="La búsqueda se concreto correctamente.", background="#B9F582"
                 )
-                return data_list
+                return data_list, None
             except:
                 self.l_status.config(
                     text="No se encontró el DNI solicitado en la base de datos.",
                     background="#FF5656",
                 )
-                showerror("ATENCIÓN!!", "Este DNI no existe en la base de datos")
-                return [["-" for _ in range(11)]]
-        else:
+                info = "Este DNI no existe en la base de datos"
+                return None, info
+
+        except RegexError as log:
+            log.guardar_error()
             self.l_status.config(
                 text="Verifique los datos ingresados.", background="#FF5656"
             )
-            showerror("ATENCIÓN!!", "La informacion cargada es incorrecta.")
-            return [["-" for _ in range(11)]]
+            info = "La informacion cargada es incorrecta."
+            return None, info
 
     # ----- FUNCION ACTUALIZAR TREEVIEW -----
-    def update_treeview(self, mitreview, parameter: str = None) -> str:
+    def update_treeview(self, mitreview: object, parameter: str = None) -> str:
         self.mitreview = mitreview
         self.parameter = parameter
         if not parameter:
@@ -68,9 +72,3 @@ class Auxiliares:
                 values=(row.dni, row.nombres, row.apellidos, row.obra, row.jornal),
             )
         return ""
-
-    # ----- FUNCION DE CIERRE DE LA APLICACION -----
-    def close_app(self, window):
-        option = askokcancel("Cerrar la aplicación", "¿Está seguro que quiere salir?")
-        if option:
-            window.destroy()

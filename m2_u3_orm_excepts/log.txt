@@ -1,0 +1,5 @@
+Se ingreso mal el dato en Busqueda de dni
+Se ingreso mal el dato en Dni en alta
+Se ingreso mal el dato en CUIL en alta
+Se ingreso mal el dato en Busqueda de dni
+Se ingreso mal el dato en Dni en alta
