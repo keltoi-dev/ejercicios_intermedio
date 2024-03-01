@@ -10,10 +10,15 @@ from verifica_campos import RegexCampos, RegexError
 
 class Auxiliares:
     def __init__(self) -> None:
+        """
+        Constructor de la clase para metodos auxiliares del modelo.
+        Instancia el manejo de la base de datos.
+        """
         self.base = ManageBase()
 
     # ----- FUNCION DE CONSULTA DESDE TREEVIEW -----
     def consult_record(self, tree: object) -> list:
+        """ """
         self.tree = tree
         item = self.tree.item(self.tree.selection())
         data = item["values"][0]

@@ -14,13 +14,31 @@ from peewee import IntegrityError
 
 class ManageData:
     def __init__(self, l_status: object, tree: object) -> None:
+        """
+        Constructor de la clase de manejo de datos CRUD
+
+        :param l_status: Objeto de tkinter, label para informacion
+        :param tree: Objeto de tkinter treeview, tabla que muestra el contenido de la base de datos
+        """
         self.l_status = l_status
         self.tree = tree
         self.aux = Auxiliares()
         self.base = ManageBase()
 
     # ----- FUNCION ALTA DE REGISTRO -----
-    def create_record(self, data: list, aux_vista) -> tuple:
+    def create_record(self, data: list, aux_vista) -> str:
+        """
+        Funcion de alta de los datos capturados en una lista de los campos entry de la vista.
+        Verifica que los campos dni, cuil, nombre y apellido no esten vacios.
+        Instancia RegexCampos en la variable dni y cuil para control de estos campos.
+        Accede al metodo del ORM para grabar los datos en la tabla de la base sqlite3.
+        Actualiza el treeview y vacia los campos entry de la vista.
+        En caso de error retorna textos con el detalle del error, de acurdo al manejo de las excepciones.
+
+        :param data: Lista con la informacion de los campos
+        :param aux_vista: Objeto que llega desde el modulo vista
+        :returns: un textos para la informacion de los message error
+        """
         self.data = data
         self.aux_vista = aux_vista
         if not self.data[0] or not self.data[1] or not self.data[2] or not self.data[3]:
@@ -60,6 +78,15 @@ class ManageData:
 
     # ----- FUNCION DE BAJA DE REGISTRO -----
     def delete_record(self, data: list) -> list:
+        """
+        Funcion de baja de registro seleccionado de la base de datos.
+        Recibe la informacion del metodo auxiliar de la vista.
+        Llama al metodo del ORM para eliminar la fila de la base de datos.
+        Actualiza el treeview e informa en la barra de status la accion.
+
+        :param data: Lista con la informacion de los campos
+        :returns: Una lista vacia para limpieza de los campos
+        """
         self.data = data
         print(type(self.data[0]))
         self.base.delete_row(self.data[0])
@@ -73,6 +100,14 @@ class ManageData:
 
     # ----- FUNCION DE MODIFICACION DE REGISTROS -----
     def modify_record(self, data: list) -> list:
+        """
+        Funcion para la modificacion del registro seleccionado de la base de datos.
+        Los datos los recibe del metodo auxiliar de la vista.
+        Llama al metodo del ORM para el update de la fila en la base de datos.
+
+        :param data: Lista con la informacion de los campos
+        :returns: Una lista vacia para limpieza de los campos
+        """
         self.data = data
         self.base.modify_row(self.data)
         self.l_status.config(

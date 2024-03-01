@@ -242,7 +242,8 @@ class MasterWindow:
 
     def delete_record_view(self) -> None:
         """
-        Control de la información para la baja llamando al módulo modelo - delete_record
+        Control de la información, verifica la existencia de informacion en el campo de dni,
+        para la baja llamando al módulo modelo - delete_record
         Advertencia de errores con ventanas emergentes showeror y confirmación con askokcancel
         """
         data_list = self.vista.create_list()
@@ -263,7 +264,8 @@ class MasterWindow:
 
     def modify_record_view(self) -> None:
         """
-        Control de la información para modificaciones llamando al módulo modelo - modify_record
+        Control de la información, verifica la existencia de informacion en el campo de dni,
+        para modificaciones llamando al módulo modelo - modify_record
         Advertencia de errores con ventanas emergentes showeror y confirmación con askokcancel
         """
         data_list = self.vista.create_list()
@@ -284,7 +286,7 @@ class MasterWindow:
 
     def search_record_view(self, var_dni: object) -> None:
         """
-        Control de la información para busqueda llamando al módulo auxiliar de modelo - search_record
+        Funcion auxiliar para el llamando al módulo auxiliar de modelo - search_record
         Advertencia de errores con ventanas emergentes showeror y confirmación con askokcancel
         :param var_dni: Objeto entry del frame datos
         """
