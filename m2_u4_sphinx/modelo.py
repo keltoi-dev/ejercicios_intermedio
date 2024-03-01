@@ -20,8 +20,9 @@ class ManageData:
         self.base = ManageBase()
 
     # ----- FUNCION ALTA DE REGISTRO -----
-    def create_record(self, data: list) -> tuple:
+    def create_record(self, data: list, aux_vista) -> tuple:
         self.data = data
+        self.aux_vista = aux_vista
         if not self.data[0] or not self.data[1] or not self.data[2] or not self.data[3]:
             self.l_status.config(
                 text="Complete todos los campos.", background="#FF5656"
@@ -41,20 +42,21 @@ class ManageData:
                         background="#B9F582",
                     )
                     self.aux.update_treeview(self.tree)
-                    return [["" for _ in range(11)]], None
+                    self.aux_vista.set_entry([["" for _ in range(11)]])
+                    return None
                 except IntegrityError:
                     self.l_status.config(
                         text="El DNI ingresado ya está cargado en la base de datos.",
                         background="#FF5656",
                     )
-                    return None, "El DNI ingresado ya fue cargado."
+                    return "El DNI ingresado ya fue cargado."
 
             except RegexError as log:
                 log.guardar_error()
                 self.l_status.config(
                     text="Verifique los datos ingresados.", background="#FF5656"
                 )
-                return None, "La informacion cargada es incorrecta."
+                return "La informacion cargada es incorrecta."
 
     # ----- FUNCION DE BAJA DE REGISTRO -----
     def delete_record(self, data: list) -> list:

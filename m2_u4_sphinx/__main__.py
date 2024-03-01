@@ -1,6 +1,7 @@
 """
 main.py:
     Lanzador de la aplicacion.
+    Instancia a tkinter y mantiene la ventana abierta con el mainloop
 """
 
 import vista
@@ -9,7 +10,7 @@ __author__ = "German Fraga"
 __maintainer__ = "German Fraga"
 __email__ = "gdfraga@gmail.com"
 __copyright__ = "Copyright 2024"
-__version__ = "0.2.6"
+__version__ = "0.2.7"
 
 from tkinter import Tk
 import vista

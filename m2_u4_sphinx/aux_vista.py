@@ -1,5 +1,10 @@
-# Practicando POO
-# Germán Fraga
+"""
+aux_vista.py:
+    Contiene funciones auxiliares a la vista, como el seteo de los widgets entry y,
+    la construcción de la lista para movimiento de toda la información y la función
+    de cierre de la aplicación.
+"""
+
 from tkinter.messagebox import askokcancel
 
 
@@ -21,6 +26,24 @@ class AuxVista:
         e_dni,
         e_cuil,
     ) -> None:
+        """
+        Constructor de la clase que recibe todas las variables necesarias
+        para la operación de los modulos que componen esta clase.
+        :param var_dni: El número de DNI
+        :param var_cuil: El número de CUIL
+        :param var_nombre: El nombre/s de la persona
+        :param var_apellido: El apellido/s de la persona
+        :param var_domicilio: El domicilio declarado
+        :param var_fnacimiento: La fecha de nacimiento
+        :param var_falta: La fecha de alta en el sistema o la empresa
+        :param var_art: Cual es la compañia de seguro o ART
+        :param var_obra: La obra a la cual fue asignado/a
+        :param var_jornal: El valor del jornal diario
+        :param var_filtro: El dato para el filtrado por obra en el treeview
+        :param l_status: Objeto label para mostrar la información
+        :param e_dni: Objeto entry para bloquear o desbloquear el campo DNI
+        :param e_cuil: Objeto entry para bloquear o desbloquear el campo CUIL
+        """
         self.var_dni = var_dni
         self.var_cuil = var_cuil
         self.var_nombre = var_nombre
@@ -39,6 +62,11 @@ class AuxVista:
     # ***** MANIPULACION DE DATOS *****
     # ----- CREACION DE UNA LISTA PARA MOVIMIENTO DE LOS DATOS -----
     def create_list(self) -> list:
+        """
+        Se crea una lista con todos los datos del formulario para una mas simple manipulación de la información.
+        :returns data_list: La lista con toda la información.
+        : rtype: list[str, int]
+        """
         data_list = [
             self.var_dni.get(),
             self.var_cuil.get(),
@@ -55,6 +83,13 @@ class AuxVista:
 
     # ----- SETEO DE LOS ENTRY -----
     def set_entry(self, data_list: list) -> None:
+        """
+        Esta función se utiliza para la carga de la información, seleccionada en el treeview o consultada por la búsqueda,
+        en todo los entry del frame de datos. En esta situación se deshabilitan los campos de DNI y CUIL que no pueden ser modificados.
+        También se le puede enviar una lista vacia para poder limpiar todos los campos y en esta ocasión se habilitan los entry bloqueados.
+
+        :param data_list: La lista con toda la información a cargar o vacia para limpiar
+        """
 
         self.var_dni.set(data_list[0][1])
         self.var_cuil.set(data_list[0][2])
@@ -80,6 +115,11 @@ class AuxVista:
 
     # ----- FUNCION DE CIERRE DE LA APLICACION -----
     def close_app(self, window) -> None:
+        """
+        Función para el cierre de la aplicación, con una ventana emergente que consulta si está seguro de esta operación.
+
+        :param window: Objeto de tkinter, la ventana principal
+        """
         option = askokcancel("Cerrar la aplicación", "¿Está seguro que quiere salir?")
         if option:
             window.destroy()
