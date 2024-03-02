@@ -22,18 +22,20 @@ aux = Auxiliares()
 class MasterWindow:
     def __init__(self, window: object) -> None:
         """
-        Armado de la ventana de tkinter
-        :param window: objeto de Tk
+        Constructor del armado de la ventana de tkinter
+
+        :param window: Objeto de Tk
         """
         self.window = window
 
     def base_window(self) -> None:
         """
-        Se dibuja un menú con solo la opcion de información de la aplicación.
-        Contruye una ventana principal con tres frames. Esta ventana contiene también el título y la barra de estado.
+        Se dibuja un menú con solo el Acerca de... con la información de la aplicación.
+        Construye una ventana principal con tres frames. Esta ventana contiene también el título y la barra de estado.
         Los frames son: El de menú, que contiene los botones de alta, baja, modificación, limpieza y salir.
-        El de datos, que se compone de todas las cajas de entrada para la información a gurdar en la base de datos.
-        El del treeview, donde se dibujara la planilla con los datos cargados en la base de datos con la posibilidad de filtrar por obras.
+        El de datos, que se compone de todas las cajas de entrada para la información a guardar en la base de datos.
+        El del treeview, donde se dibujara la planilla con los datos cargados en la base de datos con
+        la posibilidad de filtrar por obras.
         """
 
         # ----- DECLARACION DE TEXTO PARA VENTANA ACERCA DE ... -----
@@ -47,12 +49,12 @@ class MasterWindow:
 
                 Entrega final - Diplomatura Python 3
                 Nivel intermedio.
-                Paradigama de Programacion Orientado a Objetos
+                Paradigama de Programación Orientada a Objetos
                 01/3/2024
                 """
 
         # Construccion de la ventana principal
-        self.window.title("Evaluacion Final - Python Intermedio")
+        self.window.title("Evaluación Final - Python Intermedio")
         self.window.resizable(False, False)
         ruta = os.getcwd() + os.sep + "img" + os.sep
         self.window.iconbitmap(ruta + "python.ico")
@@ -226,7 +228,7 @@ class MasterWindow:
             e_dni,
             e_cuil,
         )
-
+        # ----- ACTUALIZACION DEL TREEVIEW EN EL ARRANQUE DE LA APP -----
         aux.update_treeview(tree, var_filtro.get())
 
     # Funciones auxiliares para llamada a modelo y retorno de errores
@@ -242,9 +244,9 @@ class MasterWindow:
 
     def delete_record_view(self) -> None:
         """
-        Control de la información, verifica la existencia de informacion en el campo de dni,
-        para la baja llamando al módulo modelo - delete_record
-        Advertencia de errores con ventanas emergentes showeror y confirmación con askokcancel
+        Control de la información, verifica la existencia de datos en el campo de dni,
+        para la baja llamando al módulo modelo - delete_record.
+        Advertencia de errores con ventanas emergentes showeror y confirmación con askokcancel.
         """
         data_list = self.vista.create_list()
         if not data_list[0]:
@@ -264,9 +266,9 @@ class MasterWindow:
 
     def modify_record_view(self) -> None:
         """
-        Control de la información, verifica la existencia de informacion en el campo de dni,
-        para modificaciones llamando al módulo modelo - modify_record
-        Advertencia de errores con ventanas emergentes showeror y confirmación con askokcancel
+        Control de la información, verifica la existencia de datos en el campo de dni,
+        para modificaciones llamando al módulo modelo - modify_record.
+        Advertencia de errores con ventanas emergentes showeror y confirmación con askokcancel.
         """
         data_list = self.vista.create_list()
         if not data_list[0]:
@@ -286,28 +288,29 @@ class MasterWindow:
 
     def search_record_view(self, var_dni: object) -> None:
         """
-        Funcion auxiliar para el llamando al módulo auxiliar de modelo - search_record
-        Advertencia de errores con ventanas emergentes showeror y confirmación con askokcancel
+        Función auxiliar para el llamando al módulo auxiliar de modelo - search_record.
+        Advertencia de errores con ventanas emergentes showeror y confirmación con askokcancel.
+
         :param var_dni: Objeto entry del frame datos
         """
         info = aux.search_record(var_dni.get(), self.l_status, self.vista)
         if info:
             showerror("ATENCIÓN!!", info)
-        # else:
-        #     self.vista.set_entry(data)
 
 
 class WidgetsWindows(MasterWindow):
     def __init__(self, frame: object) -> None:
         """
-        Creación de los objetos para los widgets de la vista
+        Creación de los objetos para los widgets de la vista.
+
         :param frame: Objeto contenedor de tkinter
         """
         self.frame = frame
 
     def boton_1(self, text_btn: str, instruction: str, position: int) -> None:
         """
-        Objeto para generar botones de tkinter
+        Objeto para generar botones de tkinter.
+
         :param text_btn: Texto del botón
         :param instruction: Función lambda para ejecutar desde el botón
         :param position: Valor de la fila del botón
@@ -325,7 +328,8 @@ class WidgetsWindows(MasterWindow):
 
     def boton_2(self, text_btn: str, instruction: str, position: int) -> None:
         """
-        Objeto para generar botones grises de tkinter
+        Objeto para generar botones grises de tkinter.
+
         :param text_btn: Texto del botón
         :param instruction: Función lambda para ejecutar desde el botón
         :param position: Valor de la fila del botón
@@ -344,7 +348,8 @@ class WidgetsWindows(MasterWindow):
 
     def date_in(self, data_var: object, position: int) -> None:
         """
-        Objeto para almanaque para carga de fechas de tkcalendar
+        Objeto para almanaque para carga de fechas de tkcalendar.
+
         :param data_var: Variable para tomar la fecha
         :param position: Valor de la columna del entry
         """

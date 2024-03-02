@@ -8,6 +8,7 @@ aux_vista.py:
 from tkinter.messagebox import askokcancel
 
 
+# ***** MANIPULACION DE DATOS *****
 class AuxVista:
     def __init__(
         self,
@@ -59,13 +60,12 @@ class AuxVista:
         self.e_dni = e_dni
         self.e_cuil = e_cuil
 
-    # ***** MANIPULACION DE DATOS *****
     # ----- CREACION DE UNA LISTA PARA MOVIMIENTO DE LOS DATOS -----
     def create_list(self) -> list:
         """
-        Se crea una lista con todos los datos del formulario para una mas simple manipulación de la información.
+        Se crea una lista con todos los datos del formulario para una más simple manipulación de la información.
         :returns data_list: La lista con toda la información.
-        : rtype: list[str, int]
+        :rtype: list[str, int]
         """
         data_list = [
             self.var_dni.get(),

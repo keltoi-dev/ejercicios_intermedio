@@ -1,9 +1,9 @@
 """
 modelo.py:
-    Modelo de la aplicacion - Altas, bajas y modificaciones
+    Modelo de la aplicación - Altas, bajas y modificaciones
 """
 
-from manejo_base import ManageBase
+from manejo_base import ManageBase, BaseError
 from aux_modelo import Auxiliares
 from verifica_campos import RegexCampos, RegexError
 from peewee import IntegrityError
@@ -17,7 +17,7 @@ class ManageData:
         """
         Constructor de la clase de manejo de datos CRUD
 
-        :param l_status: Objeto de tkinter, label para informacion
+        :param l_status: Objeto de tkinter, label para información
         :param tree: Objeto de tkinter treeview, tabla que muestra el contenido de la base de datos
         """
         self.l_status = l_status
@@ -28,16 +28,17 @@ class ManageData:
     # ----- FUNCION ALTA DE REGISTRO -----
     def create_record(self, data: list, aux_vista) -> str:
         """
-        Funcion de alta de los datos capturados en una lista de los campos entry de la vista.
+        Función de alta de los datos capturados en una lista de los campos entry de la vista.
         Verifica que los campos dni, cuil, nombre y apellido no esten vacios.
         Instancia RegexCampos en la variable dni y cuil para control de estos campos.
-        Accede al metodo del ORM para grabar los datos en la tabla de la base sqlite3.
+        Accede al método del ORM para grabar los datos en la tabla de la base sqlite3.
         Actualiza el treeview y vacia los campos entry de la vista.
-        En caso de error retorna textos con el detalle del error, de acurdo al manejo de las excepciones.
+        En caso de error retorna textos con el detalle del error, de acuerdo al manejo de las excepciones.
 
-        :param data: Lista con la informacion de los campos
-        :param aux_vista: Objeto que llega desde el modulo vista
-        :returns: un textos para la informacion de los message error
+        :param data: Lista con la información de los campos
+        :param aux_vista: Objeto que llega desde el módulo vista
+        :returns: un texto para la información de los message error
+        :rtype: str
         """
         self.data = data
         self.aux_vista = aux_vista
@@ -63,6 +64,7 @@ class ManageData:
                     self.aux_vista.set_entry([["" for _ in range(11)]])
                     return None
                 except IntegrityError:
+                    BaseError().guardar_error()
                     self.l_status.config(
                         text="El DNI ingresado ya está cargado en la base de datos.",
                         background="#FF5656",
@@ -88,7 +90,6 @@ class ManageData:
         :returns: Una lista vacia para limpieza de los campos
         """
         self.data = data
-        print(type(self.data[0]))
         self.base.delete_row(self.data[0])
         self.aux.update_treeview(self.tree)
         self.l_status.config(

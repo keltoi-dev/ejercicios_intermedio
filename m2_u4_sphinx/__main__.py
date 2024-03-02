@@ -1,6 +1,6 @@
 """
 main.py:
-    Lanzador de la aplicacion.
+    Lanzador de la aplicación.
     Instancia a tkinter y mantiene la ventana abierta con el mainloop
 """
 
@@ -20,6 +20,7 @@ class Controller:
     def __init__(self, root: object) -> None:
         """
         Instancia la MasterWindow de la vista
+
         :param root: Objeto de Tk
         """
         self.root = root
@@ -27,7 +28,7 @@ class Controller:
         self.obj_view = vista.MasterWindow(self.root)
 
 
-# Verificacion que se inicia la applicacion desde este archivo
+# Verificación que se inicia la aplicación desde este archivo
 if __name__ == "__main__":
     root = Tk()
     # Instancia el controller
