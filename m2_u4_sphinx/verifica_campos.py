@@ -55,6 +55,8 @@ class RegexCampos:
         """
         Función que controla el cumplimiento de los parámetros enviados en la instancia y
         en caso de no concordancia genera un raise.
+
+        :raises: RegexError
         """
         if not re.match(self.codigo, self.data):
             raise RegexError(self.funcion)
