@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Modelo de la aplicación &mdash; documentación de UTN - Python Intermedio - 0.2.7</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="_static/fonts.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=e397904d"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/translations.js?v=efdbd0b9"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Búsqueda" href="search.html" />
+    <link rel="next" title="Manejo de la base de datos" href="manejo_base.html" />
+    <link rel="prev" title="Módulo para la interfaz gráfica" href="vista.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            UTN - Python Intermedio
+          </a>
+              <div class="version">
+                0.2.7
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Buscar documentos" aria-label="Buscar documentos" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contenido:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="main.html">Controlador de la aplicación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vista.html">Módulo para la interfaz gráfica</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Modelo de la aplicación</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#modelo.ManageData"><code class="docutils literal notranslate"><span class="pre">ManageData</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#modelo.ManageData.create_record"><code class="docutils literal notranslate"><span class="pre">ManageData.create_record()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modelo.ManageData.delete_record"><code class="docutils literal notranslate"><span class="pre">ManageData.delete_record()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modelo.ManageData.modify_record"><code class="docutils literal notranslate"><span class="pre">ManageData.modify_record()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="manejo_base.html">Manejo de la base de datos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="verifica_campos.html">Módulo para verificacion de campos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aux_modelo.html">Auxiliares del módulo modelo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aux_vista.html">Auxiliares del módulo vista</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Manual de la aplicación:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">1. Descripcion general</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html#pantalla-principal-sus-componentes">2. Pantalla principal - Sus componentes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html#manual-de-uso">3. Manual de uso.</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">UTN - Python Intermedio</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Modelo de la aplicación</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/modelo.rst.txt" rel="nofollow"> Ver código fuente de la página</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-modelo">
+<span id="modelo-de-la-aplicacion"></span><h1>Modelo de la aplicación<a class="headerlink" href="#module-modelo" title="Link to this heading"></a></h1>
+<dl class="simple">
+<dt>modelo.py:</dt><dd><p>Modelo de la aplicación - Altas, bajas y modificaciones</p>
+</dd>
+</dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="modelo.ManageData">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelo.</span></span><span class="sig-name descname"><span class="pre">ManageData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">l_status</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tree</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelo.html#ManageData"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#modelo.ManageData" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="modelo.ManageData.create_record">
+<span class="sig-name descname"><span class="pre">create_record</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aux_vista</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/modelo.html#ManageData.create_record"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#modelo.ManageData.create_record" title="Link to this definition"></a></dt>
+<dd><p>Función de alta de los datos capturados en una lista de los campos entry de la vista.
+Verifica que los campos dni, cuil, nombre y apellido no esten vacios.
+Instancia RegexCampos en la variable dni y cuil para control de estos campos.
+Accede al método del ORM para grabar los datos en la tabla de la base sqlite3.
+Actualiza el treeview y vacia los campos entry de la vista.
+En caso de error retorna textos con el detalle del error, de acuerdo al manejo de las excepciones.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> – Lista con la información de los campos</p></li>
+<li><p><strong>aux_vista</strong> – Objeto que llega desde el módulo vista</p></li>
+</ul>
+</dd>
+<dt class="field-even">Devuelve<span class="colon">:</span></dt>
+<dd class="field-even"><p>un texto para la información de los message error</p>
+</dd>
+<dt class="field-odd">Tipo del valor devuelto<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelo.ManageData.delete_record">
+<span class="sig-name descname"><span class="pre">delete_record</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/modelo.html#ManageData.delete_record"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#modelo.ManageData.delete_record" title="Link to this definition"></a></dt>
+<dd><p>Funcion de baja de registro seleccionado de la base de datos.
+Recibe la informacion del metodo auxiliar de la vista.
+Llama al metodo del ORM para eliminar la fila de la base de datos.
+Actualiza el treeview e informa en la barra de status la accion.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> – Lista con la informacion de los campos</p>
+</dd>
+<dt class="field-even">Devuelve<span class="colon">:</span></dt>
+<dd class="field-even"><p>Una lista vacia para limpieza de los campos</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelo.ManageData.modify_record">
+<span class="sig-name descname"><span class="pre">modify_record</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/modelo.html#ManageData.modify_record"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#modelo.ManageData.modify_record" title="Link to this definition"></a></dt>
+<dd><p>Funcion para la modificacion del registro seleccionado de la base de datos.
+Los datos los recibe del metodo auxiliar de la vista.
+Llama al metodo del ORM para el update de la fila en la base de datos.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> – Lista con la informacion de los campos</p>
+</dd>
+<dt class="field-even">Devuelve<span class="colon">:</span></dt>
+<dd class="field-even"><p>Una lista vacia para limpieza de los campos</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pie de página">
+        <a href="vista.html" class="btn btn-neutral float-left" title="Módulo para la interfaz gráfica" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Anterior</a>
+        <a href="manejo_base.html" class="btn btn-neutral float-right" title="Manejo de la base de datos" accesskey="n" rel="next">Siguiente <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Derechos de autor 2024, German Fraga.</p>
+  </div>
+
+  Compilado con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    proporcionado por <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

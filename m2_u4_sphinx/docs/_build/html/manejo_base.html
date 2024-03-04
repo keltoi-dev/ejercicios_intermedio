@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manejo de la base de datos &mdash; documentación de UTN - Python Intermedio - 0.2.7</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="_static/fonts.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=e397904d"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/translations.js?v=efdbd0b9"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Búsqueda" href="search.html" />
+    <link rel="next" title="Módulo para verificacion de campos" href="verifica_campos.html" />
+    <link rel="prev" title="Modelo de la aplicación" href="modelo.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            UTN - Python Intermedio
+          </a>
+              <div class="version">
+                0.2.7
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Buscar documentos" aria-label="Buscar documentos" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contenido:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="main.html">Controlador de la aplicación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vista.html">Módulo para la interfaz gráfica</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modelo.html">Modelo de la aplicación</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Manejo de la base de datos</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#manejo_base.BaseError"><code class="docutils literal notranslate"><span class="pre">BaseError</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#manejo_base.BaseError.BASE_DIR"><code class="docutils literal notranslate"><span class="pre">BaseError.BASE_DIR</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#manejo_base.BaseError.guardar_error"><code class="docutils literal notranslate"><span class="pre">BaseError.guardar_error()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#manejo_base.BaseError.ruta2"><code class="docutils literal notranslate"><span class="pre">BaseError.ruta2</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#manejo_base.BaseModel"><code class="docutils literal notranslate"><span class="pre">BaseModel</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#manejo_base.BaseModel.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">BaseModel.DoesNotExist</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#manejo_base.BaseModel.id"><code class="docutils literal notranslate"><span class="pre">BaseModel.id</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#manejo_base.Empleados"><code class="docutils literal notranslate"><span class="pre">Empleados</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#manejo_base.Empleados.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">Empleados.DoesNotExist</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#manejo_base.Empleados.apellidos"><code class="docutils literal notranslate"><span class="pre">Empleados.apellidos</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#manejo_base.Empleados.art"><code class="docutils literal notranslate"><span class="pre">Empleados.art</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#manejo_base.Empleados.cuil"><code class="docutils literal notranslate"><span class="pre">Empleados.cuil</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#manejo_base.Empleados.dni"><code class="docutils literal notranslate"><span class="pre">Empleados.dni</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#manejo_base.Empleados.domicilio"><code class="docutils literal notranslate"><span class="pre">Empleados.domicilio</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#manejo_base.Empleados.f_alta"><code class="docutils literal notranslate"><span class="pre">Empleados.f_alta</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#manejo_base.Empleados.f_nacimiento"><code class="docutils literal notranslate"><span class="pre">Empleados.f_nacimiento</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#manejo_base.Empleados.id"><code class="docutils literal notranslate"><span class="pre">Empleados.id</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#manejo_base.Empleados.jornal"><code class="docutils literal notranslate"><span class="pre">Empleados.jornal</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#manejo_base.Empleados.nombres"><code class="docutils literal notranslate"><span class="pre">Empleados.nombres</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#manejo_base.Empleados.obra"><code class="docutils literal notranslate"><span class="pre">Empleados.obra</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#manejo_base.ManageBase"><code class="docutils literal notranslate"><span class="pre">ManageBase</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#manejo_base.ManageBase.delete_row"><code class="docutils literal notranslate"><span class="pre">ManageBase.delete_row()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#manejo_base.ManageBase.filter_table"><code class="docutils literal notranslate"><span class="pre">ManageBase.filter_table()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#manejo_base.ManageBase.modify_row"><code class="docutils literal notranslate"><span class="pre">ManageBase.modify_row()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#manejo_base.ManageBase.save_row"><code class="docutils literal notranslate"><span class="pre">ManageBase.save_row()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#manejo_base.ManageBase.search_one"><code class="docutils literal notranslate"><span class="pre">ManageBase.search_one()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#manejo_base.ManageBase.update_table"><code class="docutils literal notranslate"><span class="pre">ManageBase.update_table()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="verifica_campos.html">Módulo para verificacion de campos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aux_modelo.html">Auxiliares del módulo modelo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aux_vista.html">Auxiliares del módulo vista</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Manual de la aplicación:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">1. Descripcion general</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html#pantalla-principal-sus-componentes">2. Pantalla principal - Sus componentes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html#manual-de-uso">3. Manual de uso.</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">UTN - Python Intermedio</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Manejo de la base de datos</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/manejo_base.rst.txt" rel="nofollow"> Ver código fuente de la página</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-manejo_base">
+<span id="manejo-de-la-base-de-datos"></span><h1>Manejo de la base de datos<a class="headerlink" href="#module-manejo_base" title="Link to this heading"></a></h1>
+<dl class="simple">
+<dt>manejo_base.py:</dt><dd><p>Controla todas las operaciones a realizar en la base de datos a través
+del ORM Peewee en SQLite3.</p>
+</dd>
+</dl>
+<dl class="py exception">
+<dt class="sig sig-object py" id="manejo_base.BaseError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">manejo_base.</span></span><span class="sig-name descname"><span class="pre">BaseError</span></span><a class="reference internal" href="_modules/manejo_base.html#BaseError"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#manejo_base.BaseError" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="manejo_base.BaseError.BASE_DIR">
+<span class="sig-name descname"><span class="pre">BASE_DIR</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'D:\\Curso</span> <span class="pre">UTN\\ent_virtual\\m2_u4_sphinx'</span></em><a class="headerlink" href="#manejo_base.BaseError.BASE_DIR" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="manejo_base.BaseError.guardar_error">
+<span class="sig-name descname"><span class="pre">guardar_error</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/manejo_base.html#BaseError.guardar_error"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#manejo_base.BaseError.guardar_error" title="Link to this definition"></a></dt>
+<dd><p>Función que guarda el tipo de error, donde se localizó y la fecha y hora.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="manejo_base.BaseError.ruta2">
+<span class="sig-name descname"><span class="pre">ruta2</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'D:\\Curso</span> <span class="pre">UTN\\ent_virtual\\m2_u4_sphinx\\log.txt'</span></em><a class="headerlink" href="#manejo_base.BaseError.ruta2" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="manejo_base.BaseModel">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">manejo_base.</span></span><span class="sig-name descname"><span class="pre">BaseModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/manejo_base.html#BaseModel"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#manejo_base.BaseModel" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="manejo_base.BaseModel.DoesNotExist">
+<span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#manejo_base.BaseModel.DoesNotExist" title="Link to this definition"></a></dt>
+<dd><p>alias de <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModelDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="manejo_base.BaseModel.id">
+<span class="sig-name descname"><span class="pre">id</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;AutoField:</span> <span class="pre">BaseModel.id&gt;</span></em><a class="headerlink" href="#manejo_base.BaseModel.id" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="manejo_base.Empleados">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">manejo_base.</span></span><span class="sig-name descname"><span class="pre">Empleados</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/manejo_base.html#Empleados"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#manejo_base.Empleados" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#manejo_base.BaseModel" title="manejo_base.BaseModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="manejo_base.Empleados.DoesNotExist">
+<span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#manejo_base.Empleados.DoesNotExist" title="Link to this definition"></a></dt>
+<dd><p>alias de <code class="xref py py-class docutils literal notranslate"><span class="pre">EmpleadosDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="manejo_base.Empleados.apellidos">
+<span class="sig-name descname"><span class="pre">apellidos</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;CharField:</span> <span class="pre">Empleados.apellidos&gt;</span></em><a class="headerlink" href="#manejo_base.Empleados.apellidos" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="manejo_base.Empleados.art">
+<span class="sig-name descname"><span class="pre">art</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;CharField:</span> <span class="pre">Empleados.art&gt;</span></em><a class="headerlink" href="#manejo_base.Empleados.art" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="manejo_base.Empleados.cuil">
+<span class="sig-name descname"><span class="pre">cuil</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;IntegerField:</span> <span class="pre">Empleados.cuil&gt;</span></em><a class="headerlink" href="#manejo_base.Empleados.cuil" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="manejo_base.Empleados.dni">
+<span class="sig-name descname"><span class="pre">dni</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;IntegerField:</span> <span class="pre">Empleados.dni&gt;</span></em><a class="headerlink" href="#manejo_base.Empleados.dni" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="manejo_base.Empleados.domicilio">
+<span class="sig-name descname"><span class="pre">domicilio</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;CharField:</span> <span class="pre">Empleados.domicilio&gt;</span></em><a class="headerlink" href="#manejo_base.Empleados.domicilio" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="manejo_base.Empleados.f_alta">
+<span class="sig-name descname"><span class="pre">f_alta</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;CharField:</span> <span class="pre">Empleados.f_alta&gt;</span></em><a class="headerlink" href="#manejo_base.Empleados.f_alta" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="manejo_base.Empleados.f_nacimiento">
+<span class="sig-name descname"><span class="pre">f_nacimiento</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;CharField:</span> <span class="pre">Empleados.f_nacimiento&gt;</span></em><a class="headerlink" href="#manejo_base.Empleados.f_nacimiento" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="manejo_base.Empleados.id">
+<span class="sig-name descname"><span class="pre">id</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;AutoField:</span> <span class="pre">Empleados.id&gt;</span></em><a class="headerlink" href="#manejo_base.Empleados.id" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="manejo_base.Empleados.jornal">
+<span class="sig-name descname"><span class="pre">jornal</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;FloatField:</span> <span class="pre">Empleados.jornal&gt;</span></em><a class="headerlink" href="#manejo_base.Empleados.jornal" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="manejo_base.Empleados.nombres">
+<span class="sig-name descname"><span class="pre">nombres</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;CharField:</span> <span class="pre">Empleados.nombres&gt;</span></em><a class="headerlink" href="#manejo_base.Empleados.nombres" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="manejo_base.Empleados.obra">
+<span class="sig-name descname"><span class="pre">obra</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;CharField:</span> <span class="pre">Empleados.obra&gt;</span></em><a class="headerlink" href="#manejo_base.Empleados.obra" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="manejo_base.ManageBase">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">manejo_base.</span></span><span class="sig-name descname"><span class="pre">ManageBase</span></span><a class="reference internal" href="_modules/manejo_base.html#ManageBase"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#manejo_base.ManageBase" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="manejo_base.ManageBase.delete_row">
+<span class="sig-name descname"><span class="pre">delete_row</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/manejo_base.html#ManageBase.delete_row"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#manejo_base.ManageBase.delete_row" title="Link to this definition"></a></dt>
+<dd><p>Se elimina todo un registro de la tabla de acuerdo al número de dni recibido.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> – Número de dni seleccionado</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="manejo_base.ManageBase.filter_table">
+<span class="sig-name descname"><span class="pre">filter_table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/manejo_base.html#ManageBase.filter_table"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#manejo_base.ManageBase.filter_table" title="Link to this definition"></a></dt>
+<dd><p>Filtra la información por el nombre de la obra para la carga en el treeview.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> – String con el dato del campo filtro</p>
+</dd>
+<dt class="field-even">Devuelve<span class="colon">:</span></dt>
+<dd class="field-even"><p>Todos la informacion de la tabla Empleados</p>
+</dd>
+<dt class="field-odd">Tipo del valor devuelto<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[str, int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="manejo_base.ManageBase.modify_row">
+<span class="sig-name descname"><span class="pre">modify_row</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/manejo_base.html#ManageBase.modify_row"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#manejo_base.ManageBase.modify_row" title="Link to this definition"></a></dt>
+<dd><p>Actualización del registro seleccionado, dejando sin posibilidad de modificación
+el campo del DNI y del CUIL.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> – Lista con los datos a modificar</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="manejo_base.ManageBase.save_row">
+<span class="sig-name descname"><span class="pre">save_row</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/manejo_base.html#ManageBase.save_row"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#manejo_base.ManageBase.save_row" title="Link to this definition"></a></dt>
+<dd><p>Graba la informacion cargada en la base de datos, previa asigancion a cada uno de los campos
+del registro desde la lista recibida.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> – Lista con toda la informacion cargada</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="manejo_base.ManageBase.search_one">
+<span class="sig-name descname"><span class="pre">search_one</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/manejo_base.html#ManageBase.search_one"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#manejo_base.ManageBase.search_one" title="Link to this definition"></a></dt>
+<dd><p>Carga un registro de la tabla de acuerdo al id solicitado.
+Genera una lista con toda la información recibida por el ORM.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> – Número de id seleccionado</p>
+</dd>
+<dt class="field-even">Devuelve<span class="colon">:</span></dt>
+<dd class="field-even"><p>Todos la información de la tabla Empleados</p>
+</dd>
+<dt class="field-odd">Tipo del valor devuelto<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[str, int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="manejo_base.ManageBase.update_table">
+<span class="sig-name descname"><span class="pre">update_table</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/manejo_base.html#ManageBase.update_table"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#manejo_base.ManageBase.update_table" title="Link to this definition"></a></dt>
+<dd><p>Consulta a todos los registro contenidos en la base de datos.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Todos la informacion de la tabla Empleados</p>
+</dd>
+<dt class="field-even">Tipo del valor devuelto<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[str, int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pie de página">
+        <a href="modelo.html" class="btn btn-neutral float-left" title="Modelo de la aplicación" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Anterior</a>
+        <a href="verifica_campos.html" class="btn btn-neutral float-right" title="Módulo para verificacion de campos" accesskey="n" rel="next">Siguiente <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Derechos de autor 2024, German Fraga.</p>
+  </div>
+
+  Compilado con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    proporcionado por <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

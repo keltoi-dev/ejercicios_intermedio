@@ -12,38 +12,24 @@ from tkinter.messagebox import askokcancel
 class AuxVista:
     def __init__(
         self,
-        var_dni,
-        var_cuil,
-        var_nombre,
-        var_apellido,
-        var_domicilio,
-        var_fnacimiento,
-        var_falta,
-        var_art,
-        var_obra,
-        var_jornal,
-        var_filtro,
-        l_status,
-        e_dni,
-        e_cuil,
+        var_dni: object,
+        var_cuil: object,
+        var_nombre: object,
+        var_apellido: object,
+        var_domicilio: object,
+        var_fnacimiento: object,
+        var_falta: object,
+        var_art: object,
+        var_obra: object,
+        var_jornal: object,
+        var_filtro: object,
+        l_status: object,
+        e_dni: object,
+        e_cuil: object,
     ) -> None:
         """
         Constructor de la clase que recibe todas las variables necesarias
         para la operación de los modulos que componen esta clase.
-        :param var_dni: El número de DNI
-        :param var_cuil: El número de CUIL
-        :param var_nombre: El nombre/s de la persona
-        :param var_apellido: El apellido/s de la persona
-        :param var_domicilio: El domicilio declarado
-        :param var_fnacimiento: La fecha de nacimiento
-        :param var_falta: La fecha de alta en el sistema o la empresa
-        :param var_art: Cual es la compañia de seguro o ART
-        :param var_obra: La obra a la cual fue asignado/a
-        :param var_jornal: El valor del jornal diario
-        :param var_filtro: El dato para el filtrado por obra en el treeview
-        :param l_status: Objeto label para mostrar la información
-        :param e_dni: Objeto entry para bloquear o desbloquear el campo DNI
-        :param e_cuil: Objeto entry para bloquear o desbloquear el campo CUIL
         """
         self.var_dni = var_dni
         self.var_cuil = var_cuil
@@ -64,7 +50,9 @@ class AuxVista:
     def create_list(self) -> list:
         """
         Se crea una lista con todos los datos del formulario para una más simple manipulación de la información.
+
         :returns data_list: La lista con toda la información.
+
         :rtype: list[str, int]
         """
         data_list = [

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>1. Descripcion general &mdash; documentación de UTN - Python Intermedio - 0.2.7</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="_static/fonts.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=e397904d"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/translations.js?v=efdbd0b9"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Búsqueda" href="search.html" />
+    <link rel="prev" title="Auxiliares del módulo vista" href="aux_vista.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            UTN - Python Intermedio
+          </a>
+              <div class="version">
+                0.2.7
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Buscar documentos" aria-label="Buscar documentos" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contenido:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="main.html">Controlador de la aplicación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vista.html">Módulo para la interfaz gráfica</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modelo.html">Modelo de la aplicación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manejo_base.html">Manejo de la base de datos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="verifica_campos.html">Módulo para verificacion de campos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aux_modelo.html">Auxiliares del módulo modelo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aux_vista.html">Auxiliares del módulo vista</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Manual de la aplicación:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">1. Descripcion general</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#pantalla-principal-sus-componentes">2. Pantalla principal - Sus componentes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#a-area-de-menu-de-comandos">A. Área de menú de comandos.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#b-area-para-manejo-de-datos">B. Área para manejo de datos.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#c-area-listado">C. Área Listado.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#d-area-de-notificacion-o-status-de-las-actividades">D. Área de notificación o status de las actividades.</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#manual-de-uso">3. Manual de uso.</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#a-alta-de-un-registro">3.a. Alta de un registro:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#b-baja-de-un-registro">3.b. Baja de un registro:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#c-modificacion-de-un-registro">3.c. Modificación de un registro:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#d-limpieza-de-las-cajas-de-entrada">3.d. Limpieza de las cajas de entrada:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#e-filtro-por-nombre-de-obra">3.e. Filtro por nombre de obra:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#f-seleccion-en-listado">3.f. Selección en listado:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#g-barra-de-menu">3.g Barra de menú.</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">UTN - Python Intermedio</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">1. Descripcion general</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/usage.rst.txt" rel="nofollow"> Ver código fuente de la página</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="descripcion-general">
+<h1>1. Descripcion general<a class="headerlink" href="#descripcion-general" title="Link to this heading"></a></h1>
+<p>Se trata de una aplicación para el manejo de una nómina de empleados.
+La visualización de la misma será con TKinter, que por medio de sus widgets podremos hacer las altas, bajas, modificaciones y consultas (CRUD). La información a manipular será guardada en una base de datos a través de SQLite3.</p>
+</section>
+<section id="pantalla-principal-sus-componentes">
+<h1>2. Pantalla principal - Sus componentes<a class="headerlink" href="#pantalla-principal-sus-componentes" title="Link to this heading"></a></h1>
+<figure class="align-center">
+<img alt="_images/inicial.png" src="_images/inicial.png" />
+</figure>
+<section id="a-area-de-menu-de-comandos">
+<h2>A. Área de menú de comandos.<a class="headerlink" href="#a-area-de-menu-de-comandos" title="Link to this heading"></a></h2>
+<blockquote>
+<div><p>A.1 Botón para dar de alta al registro.</p>
+<p>A.2 Botón para la baja del registro previamente seleccionado.</p>
+<p>A.3 Botón para la modificación del registro previamente seleccionado.</p>
+<p>A.4 Botón para limpiar los campos de ingreso de datos.</p>
+<p>A.5 Botón para salir de la aplicación.</p>
+</div></blockquote>
+</section>
+<section id="b-area-para-manejo-de-datos">
+<h2>B. Área para manejo de datos.<a class="headerlink" href="#b-area-para-manejo-de-datos" title="Link to this heading"></a></h2>
+<blockquote>
+<div><p>B.1 DNI (será controlado el tipo y longitud de dato) dato obligatorio.</p>
+<p>B.2 CUIL (será controlado el tipo y longitud de dato) dato obligatorio.</p>
+<p>B.3 Nombres de la persona, dato obligatorio.</p>
+<p>B.4 Apellidos de la persona, dato obligatorio.</p>
+<p>B.5 Domicilio en el cual reside actualmente.</p>
+<p>B.6 Fecha de nacimiento, se puede ingresar directamente o con un almanaque.</p>
+<p>B.7 Fecha de alta, por defecto aparece la fecha actual, pero se puede modificar con la misma metodología que el punto anterior.</p>
+<p>B.8 Obra a la cual fue asignado a trabajar.</p>
+<p>B.9 Seguro de accidentes personales o A.R.T.</p>
+<p>B.10 El jornal que percibe por día de trabajo.</p>
+<p>B.11 Botón de búsqueda.</p>
+</div></blockquote>
+</section>
+<section id="c-area-listado">
+<h2>C. Área Listado.<a class="headerlink" href="#c-area-listado" title="Link to this heading"></a></h2>
+<blockquote>
+<div><p>C.1 Ingresar nombre de obra por la que se quiere filtrar el listado.</p>
+<p>C.2 Botón para aplicar el filtro.</p>
+<p>C.3 Listado de todas las obras o el contenido filtrado.</p>
+</div></blockquote>
+</section>
+<section id="d-area-de-notificacion-o-status-de-las-actividades">
+<h2>D. Área de notificación o status de las actividades.<a class="headerlink" href="#d-area-de-notificacion-o-status-de-las-actividades" title="Link to this heading"></a></h2>
+</section>
+</section>
+<section id="manual-de-uso">
+<h1>3. Manual de uso.<a class="headerlink" href="#manual-de-uso" title="Link to this heading"></a></h1>
+<section id="a-alta-de-un-registro">
+<h2>3.a. Alta de un registro:<a class="headerlink" href="#a-alta-de-un-registro" title="Link to this heading"></a></h2>
+<p>Para poder dar de alta a un empleado es necesario completar todos los campos, en especial los obligatorios (DNI (B.1), CUIL (B.2), Nombres (B.3) y Apellidos (B.4)) Para el DNI es necesario que sean solo números y una cantidad mínima de dígitos de 7 y máxima de 8 sin colocar puntos. Para CUIL son 11 dígitos y sin colocar los guiones.</p>
+<p>Para las fechas se pueden ingresar directamente o a través de los almanaques que se despliegan.</p>
+<p>Una vez completados todos los datos se debe dar al botón de ALTA (A.1) y será agregado al listado de abajo (C.3) y grabado en la base de datos. En caso de errores será alertado con una ventana emergente y en todos los casos se le informará sobre el proceso en el área de notificación.</p>
+<figure class="align-center">
+<img alt="_images/alta.png" src="_images/alta.png" />
+</figure>
+</section>
+<section id="b-baja-de-un-registro">
+<h2>3.b. Baja de un registro:<a class="headerlink" href="#b-baja-de-un-registro" title="Link to this heading"></a></h2>
+<p>Hay dos caminos distintos para dar de baja a algún registro.</p>
+<ol class="arabic simple">
+<li><p>Una manera es seleccionando el mismo desde el listado en la parte inferior y luego se completarán todos los campos (B) con los datos correspondientes a ese registro.</p></li>
+<li><p>La otra alternativa es ingresar el número de DNI en el campo (B.1) con dicho nombre y presionar el botón de Buscar (B.11). Este traerá a los campos los datos correspondientes de ese registro. En casa que no exista en la base de datos ese número de DNI se dará una advertencia.</p></li>
+</ol>
+<p>En ambos métodos luego se debe presionar el botón de BAJA (A.2) se consultará si está seguro de ejecutar la sentencia y con la afirmación se borrará la información en el listado de abajo y de la base de datos. En caso de errores será alertado con una ventana emergente y en todos los casos se le informará sobre el proceso en el área de notificación.</p>
+<p><strong>OPCION 1</strong></p>
+<figure class="align-center">
+<img alt="_images/baja_1.png" src="_images/baja_1.png" />
+</figure>
+<p><strong>OPCION 2</strong></p>
+<figure class="align-center">
+<img alt="_images/baja_2.png" src="_images/baja_2.png" />
+</figure>
+</section>
+<section id="c-modificacion-de-un-registro">
+<h2>3.c. Modificación de un registro:<a class="headerlink" href="#c-modificacion-de-un-registro" title="Link to this heading"></a></h2>
+<p>Los procedimientos para la modificación de algún dato correspondiente a un registro son:</p>
+<ol class="arabic simple">
+<li><p>Una manera es seleccionando el mismo desde el listado en la parte inferior y luego se completarán todos los campos (B) con los datos correspondientes a ese registro.</p></li>
+<li><p>La otra alternativa es ingresar el número de DNI en el campo (B.1) con dicho nombre y presionar el botón de Buscar (B.11). Este traerá a los campos los datos correspondientes de ese registro. En casa que no exista en la base de datos ese número de DNI se dará una advertencia.</p></li>
+</ol>
+<p>En ambos métodos se bloquearán los campos de DNI (B.1) y CUIL (B.2), los cuales no podrán ser modificados. Luego se debe presionar el botón de MODIFICAR (A.3) se consultará si está seguro de ejecutar la sentencia y con la afirmación se actualizará la información del listado de abajo y de la base de datos. En caso de errores será alertado con una ventana emergente y en todos los casos se le informará sobre el proceso en el área de notificación.</p>
+<p><strong>OPCION 1</strong></p>
+<figure class="align-center">
+<img alt="_images/modificacion_1.png" src="_images/modificacion_1.png" />
+</figure>
+<p><strong>OPCION 2</strong></p>
+<figure class="align-center">
+<img alt="_images/modificacion_2.png" src="_images/modificacion_2.png" />
+</figure>
+</section>
+<section id="d-limpieza-de-las-cajas-de-entrada">
+<h2>3.d. Limpieza de las cajas de entrada:<a class="headerlink" href="#d-limpieza-de-las-cajas-de-entrada" title="Link to this heading"></a></h2>
+<p>Luego de hacer una consulta de la información de algún registro se puede hacer el borrado de todos los campos (B) presionando en el botón de LIMPIEZA (A.4). Al vaciar los campos se volverán a habilitar las cajas de DNI (B.1) y CUIL (B.2) para poder ingresar datos.</p>
+<figure class="align-center">
+<img alt="_images/limpiar.png" src="_images/limpiar.png" />
+</figure>
+</section>
+<section id="e-filtro-por-nombre-de-obra">
+<h2>3.e. Filtro por nombre de obra:<a class="headerlink" href="#e-filtro-por-nombre-de-obra" title="Link to this heading"></a></h2>
+<p>En el área del listado se propone la posibilidad de hacer un filtrado del mismo por el nombre de la obra asignada, y de esa manera tener la nómina correspondiente a cada obra.</p>
+<p>Se debe completar el campo con el nombre de la obra (C.1) y luego presionar el botón de Filtrar (C.2).</p>
+<p>Si se deja vacío el campo de filtrado y se presiona el botón Filtrar se volverá a mostrar todos los registros. En caso de errores será alertado con una ventana emergente y en todos los casos se le informará sobre el proceso en el área de notificación.</p>
+<figure class="align-center">
+<img alt="_images/filtro.png" src="_images/filtro.png" />
+</figure>
+</section>
+<section id="f-seleccion-en-listado">
+<h2>3.f. Selección en listado:<a class="headerlink" href="#f-seleccion-en-listado" title="Link to this heading"></a></h2>
+<p>Ya sea en el listado (C.3) completo o filtrado, al seleccionar un registro automáticamente se completarán todos los datos disponibles en el área de carga de datos. Para a posteriori poder ejecutar una BAJA o MODIFICACION.</p>
+</section>
+<section id="g-barra-de-menu">
+<h2>3.g Barra de menú.<a class="headerlink" href="#g-barra-de-menu" title="Link to this heading"></a></h2>
+<p>Solo tiene la opción de “Acerca de …” que hace abrir una ventana de información con una pequeña descripción de la aplicación y los datos del autor.</p>
+<figure class="align-center">
+<img alt="_images/acerca_de.png" src="_images/acerca_de.png" />
+</figure>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pie de página">
+        <a href="aux_vista.html" class="btn btn-neutral float-left" title="Auxiliares del módulo vista" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Anterior</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Derechos de autor 2024, German Fraga.</p>
+  </div>
+
+  Compilado con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    proporcionado por <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

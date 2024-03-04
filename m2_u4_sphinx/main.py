@@ -4,8 +4,6 @@ main.py:
     Instancia a tkinter y mantiene la ventana abierta con el mainloop
 """
 
-import vista
-
 __author__ = "German Fraga"
 __maintainer__ = "German Fraga"
 __email__ = "gdfraga@gmail.com"
@@ -13,7 +11,7 @@ __copyright__ = "Copyright 2024"
 __version__ = "0.2.7"
 
 from tkinter import Tk
-import vista
+from vista import MasterWindow
 
 
 class Controller:
@@ -25,7 +23,7 @@ class Controller:
         """
         self.root = root
         # Se instancia la vista
-        self.obj_view = vista.MasterWindow(self.root)
+        self.obj_view = MasterWindow(self.root)
 
 
 # Verificación que se inicia la aplicación desde este archivo

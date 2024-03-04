@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>modelo &mdash; documentación de UTN - Python Intermedio - 0.2.7</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/fonts.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=e397904d"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/translations.js?v=efdbd0b9"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            UTN - Python Intermedio
+          </a>
+              <div class="version">
+                0.2.7
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Buscar documentos" aria-label="Buscar documentos" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contenido:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../main.html">Controlador de la aplicación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vista.html">Módulo para la interfaz gráfica</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modelo.html">Modelo de la aplicación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../manejo_base.html">Manejo de la base de datos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../verifica_campos.html">Módulo para verificacion de campos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../aux_modelo.html">Auxiliares del módulo modelo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../aux_vista.html">Auxiliares del módulo vista</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Manual de la aplicación:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">1. Descripcion general</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage.html#pantalla-principal-sus-componentes">2. Pantalla principal - Sus componentes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage.html#manual-de-uso">3. Manual de uso.</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">UTN - Python Intermedio</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Código de módulo</a></li>
+      <li class="breadcrumb-item active">modelo</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Código fuente para modelo</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">modelo.py:</span>
+<span class="sd">    Modelo de la aplicación - Altas, bajas y modificaciones</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">manejo_base</span> <span class="kn">import</span> <span class="n">ManageBase</span><span class="p">,</span> <span class="n">BaseError</span>
+<span class="kn">from</span> <span class="nn">aux_modelo</span> <span class="kn">import</span> <span class="n">Auxiliares</span>
+<span class="kn">from</span> <span class="nn">verifica_campos</span> <span class="kn">import</span> <span class="n">RegexCampos</span><span class="p">,</span> <span class="n">RegexError</span>
+
+
+<span class="c1"># ***** FUNCIONES PARA ALTAS - BAJAS - MODIFICACIONES *****</span>
+
+
+<div class="viewcode-block" id="ManageData">
+<a class="viewcode-back" href="../modelo.html#modelo.ManageData">[documentos]</a>
+<span class="k">class</span> <span class="nc">ManageData</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">l_status</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span> <span class="n">tree</span><span class="p">:</span> <span class="nb">object</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">l_status</span> <span class="o">=</span> <span class="n">l_status</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tree</span> <span class="o">=</span> <span class="n">tree</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">aux</span> <span class="o">=</span> <span class="n">Auxiliares</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">base</span> <span class="o">=</span> <span class="n">ManageBase</span><span class="p">()</span>
+
+    <span class="c1"># ----- FUNCION ALTA DE REGISTRO -----</span>
+<div class="viewcode-block" id="ManageData.create_record">
+<a class="viewcode-back" href="../modelo.html#modelo.ManageData.create_record">[documentos]</a>
+    <span class="k">def</span> <span class="nf">create_record</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">aux_vista</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Función de alta de los datos capturados en una lista de los campos entry de la vista.</span>
+<span class="sd">        Verifica que los campos dni, cuil, nombre y apellido no esten vacios.</span>
+<span class="sd">        Instancia RegexCampos en la variable dni y cuil para control de estos campos.</span>
+<span class="sd">        Accede al método del ORM para grabar los datos en la tabla de la base sqlite3.</span>
+<span class="sd">        Actualiza el treeview y vacia los campos entry de la vista.</span>
+<span class="sd">        En caso de error retorna textos con el detalle del error, de acuerdo al manejo de las excepciones.</span>
+
+<span class="sd">        :param data: Lista con la información de los campos</span>
+<span class="sd">        :param aux_vista: Objeto que llega desde el módulo vista</span>
+<span class="sd">        :returns: un texto para la información de los message error</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">aux_vista</span> <span class="o">=</span> <span class="n">aux_vista</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">or</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">or</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="ow">or</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">3</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">l_status</span><span class="o">.</span><span class="n">config</span><span class="p">(</span>
+                <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Complete todos los campos.&quot;</span><span class="p">,</span> <span class="n">background</span><span class="o">=</span><span class="s2">&quot;#FF5656&quot;</span>
+            <span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">dni</span> <span class="o">=</span> <span class="n">RegexCampos</span><span class="p">(</span><span class="s2">&quot;^\d{7,8}$&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;Dni en alta&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">cuil</span> <span class="o">=</span> <span class="n">RegexCampos</span><span class="p">(</span><span class="s2">&quot;^\d</span><span class="si">{11}</span><span class="s2">$&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;CUIL en alta&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">dni</span><span class="o">.</span><span class="n">verificar</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">cuil</span><span class="o">.</span><span class="n">verificar</span><span class="p">()</span>
+
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">save_row</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">l_status</span><span class="o">.</span><span class="n">config</span><span class="p">(</span>
+                        <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Los datos han sido guardados correctamente.&quot;</span><span class="p">,</span>
+                        <span class="n">background</span><span class="o">=</span><span class="s2">&quot;#B9F582&quot;</span><span class="p">,</span>
+                    <span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">aux</span><span class="o">.</span><span class="n">update_treeview</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">aux_vista</span><span class="o">.</span><span class="n">set_entry</span><span class="p">([[</span><span class="s2">&quot;&quot;</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">11</span><span class="p">)]])</span>
+                    <span class="k">return</span> <span class="kc">None</span>
+                <span class="k">except</span><span class="p">:</span>
+                    <span class="n">BaseError</span><span class="p">()</span><span class="o">.</span><span class="n">guardar_error</span><span class="p">()</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">l_status</span><span class="o">.</span><span class="n">config</span><span class="p">(</span>
+                        <span class="n">text</span><span class="o">=</span><span class="s2">&quot;El DNI ingresado ya está cargado en la base de datos.&quot;</span><span class="p">,</span>
+                        <span class="n">background</span><span class="o">=</span><span class="s2">&quot;#FF5656&quot;</span><span class="p">,</span>
+                    <span class="p">)</span>
+                    <span class="k">return</span> <span class="s2">&quot;El DNI ingresado ya fue cargado.&quot;</span>
+
+            <span class="k">except</span> <span class="n">RegexError</span> <span class="k">as</span> <span class="n">log</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">guardar_error</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">l_status</span><span class="o">.</span><span class="n">config</span><span class="p">(</span>
+                    <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Verifique los datos ingresados.&quot;</span><span class="p">,</span> <span class="n">background</span><span class="o">=</span><span class="s2">&quot;#FF5656&quot;</span>
+                <span class="p">)</span>
+                <span class="k">return</span> <span class="s2">&quot;La informacion cargada es incorrecta.&quot;</span></div>
+
+
+    <span class="c1"># ----- FUNCION DE BAJA DE REGISTRO -----</span>
+<div class="viewcode-block" id="ManageData.delete_record">
+<a class="viewcode-back" href="../modelo.html#modelo.ManageData.delete_record">[documentos]</a>
+    <span class="k">def</span> <span class="nf">delete_record</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Funcion de baja de registro seleccionado de la base de datos.</span>
+<span class="sd">        Recibe la informacion del metodo auxiliar de la vista.</span>
+<span class="sd">        Llama al metodo del ORM para eliminar la fila de la base de datos.</span>
+<span class="sd">        Actualiza el treeview e informa en la barra de status la accion.</span>
+
+<span class="sd">        :param data: Lista con la informacion de los campos</span>
+<span class="sd">        :returns: Una lista vacia para limpieza de los campos</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">delete_row</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">aux</span><span class="o">.</span><span class="n">update_treeview</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">l_status</span><span class="o">.</span><span class="n">config</span><span class="p">(</span>
+            <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Los datos han sido eliminados correctamente.&quot;</span><span class="p">,</span>
+            <span class="n">background</span><span class="o">=</span><span class="s2">&quot;#B9F582&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="p">[[</span><span class="s2">&quot;&quot;</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">11</span><span class="p">)]]</span></div>
+
+
+    <span class="c1"># ----- FUNCION DE MODIFICACION DE REGISTROS -----</span>
+<div class="viewcode-block" id="ManageData.modify_record">
+<a class="viewcode-back" href="../modelo.html#modelo.ManageData.modify_record">[documentos]</a>
+    <span class="k">def</span> <span class="nf">modify_record</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Funcion para la modificacion del registro seleccionado de la base de datos.</span>
+<span class="sd">        Los datos los recibe del metodo auxiliar de la vista.</span>
+<span class="sd">        Llama al metodo del ORM para el update de la fila en la base de datos.</span>
+
+<span class="sd">        :param data: Lista con la informacion de los campos</span>
+<span class="sd">        :returns: Una lista vacia para limpieza de los campos</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">modify_row</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">l_status</span><span class="o">.</span><span class="n">config</span><span class="p">(</span>
+            <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Los datos han sido modificados correctamente.&quot;</span><span class="p">,</span>
+            <span class="n">background</span><span class="o">=</span><span class="s2">&quot;#B9F582&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">aux</span><span class="o">.</span><span class="n">update_treeview</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="p">[[</span><span class="s2">&quot;&quot;</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">11</span><span class="p">)]]</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Derechos de autor 2024, German Fraga.</p>
+  </div>
+
+  Compilado con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    proporcionado por <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

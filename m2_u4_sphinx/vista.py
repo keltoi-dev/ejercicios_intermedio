@@ -21,11 +21,6 @@ aux = Auxiliares()
 
 class MasterWindow:
     def __init__(self, window: object) -> None:
-        """
-        Constructor del armado de la ventana de tkinter
-
-        :param window: Objeto de Tk
-        """
         self.window = window
 
     def base_window(self) -> None:
@@ -300,11 +295,6 @@ class MasterWindow:
 
 class WidgetsWindows(MasterWindow):
     def __init__(self, frame: object) -> None:
-        """
-        Creación de los objetos para los widgets de la vista.
-
-        :param frame: Objeto contenedor de tkinter
-        """
         self.frame = frame
 
     def boton_1(self, text_btn: str, instruction: str, position: int) -> None:

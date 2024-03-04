@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Auxiliares del módulo modelo &mdash; documentación de UTN - Python Intermedio - 0.2.7</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="_static/fonts.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=e397904d"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/translations.js?v=efdbd0b9"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Búsqueda" href="search.html" />
+    <link rel="next" title="Auxiliares del módulo vista" href="aux_vista.html" />
+    <link rel="prev" title="Módulo para verificacion de campos" href="verifica_campos.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            UTN - Python Intermedio
+          </a>
+              <div class="version">
+                0.2.7
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Buscar documentos" aria-label="Buscar documentos" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contenido:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="main.html">Controlador de la aplicación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vista.html">Módulo para la interfaz gráfica</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modelo.html">Modelo de la aplicación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manejo_base.html">Manejo de la base de datos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="verifica_campos.html">Módulo para verificacion de campos</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Auxiliares del módulo modelo</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#aux_modelo.Auxiliares"><code class="docutils literal notranslate"><span class="pre">Auxiliares</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#aux_modelo.Auxiliares.consult_record"><code class="docutils literal notranslate"><span class="pre">Auxiliares.consult_record()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#aux_modelo.Auxiliares.search_record"><code class="docutils literal notranslate"><span class="pre">Auxiliares.search_record()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#aux_modelo.Auxiliares.update_treeview"><code class="docutils literal notranslate"><span class="pre">Auxiliares.update_treeview()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="aux_vista.html">Auxiliares del módulo vista</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Manual de la aplicación:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">1. Descripcion general</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html#pantalla-principal-sus-componentes">2. Pantalla principal - Sus componentes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html#manual-de-uso">3. Manual de uso.</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">UTN - Python Intermedio</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Auxiliares del módulo modelo</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/aux_modelo.rst.txt" rel="nofollow"> Ver código fuente de la página</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-aux_modelo">
+<span id="auxiliares-del-modulo-modelo"></span><h1>Auxiliares del módulo modelo<a class="headerlink" href="#module-aux_modelo" title="Link to this heading"></a></h1>
+<dl class="simple">
+<dt>aux_modelo.py:</dt><dd><p>Contiene funciones auxiliares al modelo, como la actulalización del treeview, consulta de
+un registro desde el treeview y consulta desde el campo de dni.</p>
+</dd>
+</dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="aux_modelo.Auxiliares">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">aux_modelo.</span></span><span class="sig-name descname"><span class="pre">Auxiliares</span></span><a class="reference internal" href="_modules/aux_modelo.html#Auxiliares"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#aux_modelo.Auxiliares" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="aux_modelo.Auxiliares.consult_record">
+<span class="sig-name descname"><span class="pre">consult_record</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tree</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/aux_modelo.html#Auxiliares.consult_record"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#aux_modelo.Auxiliares.consult_record" title="Link to this definition"></a></dt>
+<dd><p>Hace una busqueda de un registro desde la selección en el treeview.
+Consulta la base de datos a través del método del ORM filtando por el id.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>tree</strong> – Objeto de la vista que contiene la información de la base de datos</p>
+</dd>
+<dt class="field-even">Devuelve<span class="colon">:</span></dt>
+<dd class="field-even"><p>Una lista con toda la información del registro</p>
+</dd>
+<dt class="field-odd">Tipo del valor devuelto<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[str, int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="aux_modelo.Auxiliares.search_record">
+<span class="sig-name descname"><span class="pre">search_record</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">indice</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l_status</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aux_vista</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/aux_modelo.html#Auxiliares.search_record"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#aux_modelo.Auxiliares.search_record" title="Link to this definition"></a></dt>
+<dd><p>Hace una búsqueda de un número de dni desde el entry de este dato.
+Verifica que el dato ingresado cumpla con los requisitos del regex indicado en la instancia.
+Se utilizan excepciones que retornan la información sobre el error.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>indice</strong> – Es el dato del número de DNI</p></li>
+<li><p><strong>l_status</strong> – Objeto de tkinter, etiqueta para la información en la barra de status</p></li>
+<li><p><strong>aux_vista</strong> – Objeto instanciado auxiliar de la vista</p></li>
+</ul>
+</dd>
+<dt class="field-even">Devuelve<span class="colon">:</span></dt>
+<dd class="field-even"><p>Un texto con la información sobre el posible error</p>
+</dd>
+<dt class="field-odd">Tipo del valor devuelto<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="aux_modelo.Auxiliares.update_treeview">
+<span class="sig-name descname"><span class="pre">update_treeview</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mitreview</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/aux_modelo.html#Auxiliares.update_treeview"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#aux_modelo.Auxiliares.update_treeview" title="Link to this definition"></a></dt>
+<dd><p>Función para actualizar la información contenida en el treeview luego de cualquier cambio en
+la base de datos. Ya sea con toda la información o aplicando un filtro de busqueda por obra.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mitreeview</strong> – Objeto de la vista que contiene la información de la base de datos</p></li>
+<li><p><strong>parameter</strong> – String con el dato del entry filtro para seleccionar los registros</p></li>
+</ul>
+</dd>
+<dt class="field-even">Devuelve<span class="colon">:</span></dt>
+<dd class="field-even"><p>Texto vacio para la limpieza del campo de búsqueda</p>
+</dd>
+<dt class="field-odd">Tipo del valor devuelto<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pie de página">
+        <a href="verifica_campos.html" class="btn btn-neutral float-left" title="Módulo para verificacion de campos" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Anterior</a>
+        <a href="aux_vista.html" class="btn btn-neutral float-right" title="Auxiliares del módulo vista" accesskey="n" rel="next">Siguiente <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Derechos de autor 2024, German Fraga.</p>
+  </div>
+
+  Compilado con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    proporcionado por <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

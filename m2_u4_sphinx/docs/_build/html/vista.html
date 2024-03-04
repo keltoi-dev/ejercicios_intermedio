@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Módulo para la interfaz gráfica &mdash; documentación de UTN - Python Intermedio - 0.2.7</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="_static/fonts.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=e397904d"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/translations.js?v=efdbd0b9"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Búsqueda" href="search.html" />
+    <link rel="next" title="Modelo de la aplicación" href="modelo.html" />
+    <link rel="prev" title="Controlador de la aplicación" href="main.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            UTN - Python Intermedio
+          </a>
+              <div class="version">
+                0.2.7
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Buscar documentos" aria-label="Buscar documentos" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contenido:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="main.html">Controlador de la aplicación</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Módulo para la interfaz gráfica</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#vista.MasterWindow"><code class="docutils literal notranslate"><span class="pre">MasterWindow</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#vista.MasterWindow.base_window"><code class="docutils literal notranslate"><span class="pre">MasterWindow.base_window()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vista.MasterWindow.create_record_view"><code class="docutils literal notranslate"><span class="pre">MasterWindow.create_record_view()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vista.MasterWindow.delete_record_view"><code class="docutils literal notranslate"><span class="pre">MasterWindow.delete_record_view()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vista.MasterWindow.modify_record_view"><code class="docutils literal notranslate"><span class="pre">MasterWindow.modify_record_view()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vista.MasterWindow.search_record_view"><code class="docutils literal notranslate"><span class="pre">MasterWindow.search_record_view()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#vista.WidgetsWindows"><code class="docutils literal notranslate"><span class="pre">WidgetsWindows</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#vista.WidgetsWindows.boton_1"><code class="docutils literal notranslate"><span class="pre">WidgetsWindows.boton_1()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vista.WidgetsWindows.boton_2"><code class="docutils literal notranslate"><span class="pre">WidgetsWindows.boton_2()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vista.WidgetsWindows.date_in"><code class="docutils literal notranslate"><span class="pre">WidgetsWindows.date_in()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modelo.html">Modelo de la aplicación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manejo_base.html">Manejo de la base de datos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="verifica_campos.html">Módulo para verificacion de campos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aux_modelo.html">Auxiliares del módulo modelo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aux_vista.html">Auxiliares del módulo vista</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Manual de la aplicación:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">1. Descripcion general</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html#pantalla-principal-sus-componentes">2. Pantalla principal - Sus componentes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html#manual-de-uso">3. Manual de uso.</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">UTN - Python Intermedio</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Módulo para la interfaz gráfica</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/vista.rst.txt" rel="nofollow"> Ver código fuente de la página</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-vista">
+<span id="modulo-para-la-interfaz-grafica"></span><h1>Módulo para la interfaz gráfica<a class="headerlink" href="#module-vista" title="Link to this heading"></a></h1>
+<dl class="simple">
+<dt>vista.py:</dt><dd><p>Costructor de la interfaz con el usuario</p>
+</dd>
+</dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="vista.MasterWindow">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">vista.</span></span><span class="sig-name descname"><span class="pre">MasterWindow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">window</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vista.html#MasterWindow"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#vista.MasterWindow" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="vista.MasterWindow.base_window">
+<span class="sig-name descname"><span class="pre">base_window</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/vista.html#MasterWindow.base_window"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#vista.MasterWindow.base_window" title="Link to this definition"></a></dt>
+<dd><p>Se dibuja un menú con solo el Acerca de… con la información de la aplicación.
+Construye una ventana principal con tres frames. Esta ventana contiene también el título y la barra de estado.
+Los frames son: El de menú, que contiene los botones de alta, baja, modificación, limpieza y salir.
+El de datos, que se compone de todas las cajas de entrada para la información a guardar en la base de datos.
+El del treeview, donde se dibujara la planilla con los datos cargados en la base de datos con
+la posibilidad de filtrar por obras.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vista.MasterWindow.create_record_view">
+<span class="sig-name descname"><span class="pre">create_record_view</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/vista.html#MasterWindow.create_record_view"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#vista.MasterWindow.create_record_view" title="Link to this definition"></a></dt>
+<dd><p>Control de la información para el alta llamando al módulo modelo - create_record
+Advertencia de errores con ventanas emergentes showeror</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vista.MasterWindow.delete_record_view">
+<span class="sig-name descname"><span class="pre">delete_record_view</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/vista.html#MasterWindow.delete_record_view"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#vista.MasterWindow.delete_record_view" title="Link to this definition"></a></dt>
+<dd><p>Control de la información, verifica la existencia de datos en el campo de dni,
+para la baja llamando al módulo modelo - delete_record.
+Advertencia de errores con ventanas emergentes showeror y confirmación con askokcancel.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vista.MasterWindow.modify_record_view">
+<span class="sig-name descname"><span class="pre">modify_record_view</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/vista.html#MasterWindow.modify_record_view"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#vista.MasterWindow.modify_record_view" title="Link to this definition"></a></dt>
+<dd><p>Control de la información, verifica la existencia de datos en el campo de dni,
+para modificaciones llamando al módulo modelo - modify_record.
+Advertencia de errores con ventanas emergentes showeror y confirmación con askokcancel.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vista.MasterWindow.search_record_view">
+<span class="sig-name descname"><span class="pre">search_record_view</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var_dni</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/vista.html#MasterWindow.search_record_view"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#vista.MasterWindow.search_record_view" title="Link to this definition"></a></dt>
+<dd><p>Función auxiliar para el llamando al módulo auxiliar de modelo - search_record.
+Advertencia de errores con ventanas emergentes showeror y confirmación con askokcancel.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>var_dni</strong> – Objeto entry del frame datos</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="vista.WidgetsWindows">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">vista.</span></span><span class="sig-name descname"><span class="pre">WidgetsWindows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frame</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vista.html#WidgetsWindows"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#vista.WidgetsWindows" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vista.MasterWindow" title="vista.MasterWindow"><code class="xref py py-class docutils literal notranslate"><span class="pre">MasterWindow</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="vista.WidgetsWindows.boton_1">
+<span class="sig-name descname"><span class="pre">boton_1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text_btn</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instruction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/vista.html#WidgetsWindows.boton_1"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#vista.WidgetsWindows.boton_1" title="Link to this definition"></a></dt>
+<dd><p>Objeto para generar botones de tkinter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text_btn</strong> – Texto del botón</p></li>
+<li><p><strong>instruction</strong> – Función lambda para ejecutar desde el botón</p></li>
+<li><p><strong>position</strong> – Valor de la fila del botón</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vista.WidgetsWindows.boton_2">
+<span class="sig-name descname"><span class="pre">boton_2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text_btn</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instruction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/vista.html#WidgetsWindows.boton_2"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#vista.WidgetsWindows.boton_2" title="Link to this definition"></a></dt>
+<dd><p>Objeto para generar botones grises de tkinter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text_btn</strong> – Texto del botón</p></li>
+<li><p><strong>instruction</strong> – Función lambda para ejecutar desde el botón</p></li>
+<li><p><strong>position</strong> – Valor de la fila del botón</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vista.WidgetsWindows.date_in">
+<span class="sig-name descname"><span class="pre">date_in</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_var</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/vista.html#WidgetsWindows.date_in"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#vista.WidgetsWindows.date_in" title="Link to this definition"></a></dt>
+<dd><p>Objeto para almanaque para carga de fechas de tkcalendar.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_var</strong> – Variable para tomar la fecha</p></li>
+<li><p><strong>position</strong> – Valor de la columna del entry</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pie de página">
+        <a href="main.html" class="btn btn-neutral float-left" title="Controlador de la aplicación" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Anterior</a>
+        <a href="modelo.html" class="btn btn-neutral float-right" title="Modelo de la aplicación" accesskey="n" rel="next">Siguiente <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Derechos de autor 2024, German Fraga.</p>
+  </div>
+
+  Compilado con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    proporcionado por <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

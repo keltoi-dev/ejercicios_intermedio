@@ -6,11 +6,13 @@ manejo_base.py:
 
 import os
 import datetime
-from peewee import SqliteDatabase, Model, IntegrityError
+from peewee import SqliteDatabase, Model
 from peewee import IntegerField, CharField, FloatField
 
-ruta = os.getcwd() + os.sep + "src" + os.sep
-db = SqliteDatabase(ruta + "nomina_database.db")
+
+BASE_DIR = os.path.dirname((os.path.abspath(__file__)))
+ruta = os.path.join(BASE_DIR, "src", "nomina_database.db")
+db = SqliteDatabase(ruta)
 
 
 # ***** FUNCIONES PARA MANEJO DE LA BASE DE DATOS *****
@@ -22,10 +24,6 @@ class BaseModel(Model):
 
 
 class Empleados(BaseModel):
-    """
-    Declaración de los campos de la tabla con su tipo de dato y como único el dni.
-    """
-
     dni = IntegerField(unique=True)
     cuil = IntegerField()
     nombres = CharField()
@@ -151,14 +149,9 @@ class ManageBase:
 
 
 class BaseError(Exception):
-    """
-    Clase para la generación de un propio tipo de error para el manejo de
-    excepciones en el uso del ORM.
-    Genera un un log con la información del error.
-    """
 
-    BASE_DIR = os.getcwd() + os.sep
-    ruta = BASE_DIR + "log.txt"
+    BASE_DIR = os.path.dirname((os.path.abspath(__file__)))
+    ruta2 = os.path.join(BASE_DIR, "log.txt")
 
     def __init__(self) -> None:
         pass
@@ -167,7 +160,7 @@ class BaseError(Exception):
         """
         Función que guarda el tipo de error, donde se localizó y la fecha y hora.
         """
-        log_errors = open(self.ruta, "a")
+        log_errors = open(self.ruta2, "a")
         print(
             datetime.datetime.now(),
             "- Se intenta cargar un dni ya existente en la base en Alta",

@@ -6,7 +6,6 @@ modelo.py:
 from manejo_base import ManageBase, BaseError
 from aux_modelo import Auxiliares
 from verifica_campos import RegexCampos, RegexError
-from peewee import IntegrityError
 
 
 # ***** FUNCIONES PARA ALTAS - BAJAS - MODIFICACIONES *****
@@ -14,12 +13,6 @@ from peewee import IntegrityError
 
 class ManageData:
     def __init__(self, l_status: object, tree: object) -> None:
-        """
-        Constructor de la clase de manejo de datos CRUD
-
-        :param l_status: Objeto de tkinter, label para información
-        :param tree: Objeto de tkinter treeview, tabla que muestra el contenido de la base de datos
-        """
         self.l_status = l_status
         self.tree = tree
         self.aux = Auxiliares()
@@ -63,7 +56,7 @@ class ManageData:
                     self.aux.update_treeview(self.tree)
                     self.aux_vista.set_entry([["" for _ in range(11)]])
                     return None
-                except IntegrityError:
+                except:
                     BaseError().guardar_error()
                     self.l_status.config(
                         text="El DNI ingresado ya está cargado en la base de datos.",

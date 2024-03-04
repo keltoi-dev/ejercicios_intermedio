@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>aux_vista &mdash; documentación de UTN - Python Intermedio - 0.2.7</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/fonts.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=e397904d"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/translations.js?v=efdbd0b9"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            UTN - Python Intermedio
+          </a>
+              <div class="version">
+                0.2.7
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Buscar documentos" aria-label="Buscar documentos" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contenido:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../main.html">Controlador de la aplicación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vista.html">Módulo para la interfaz gráfica</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modelo.html">Modelo de la aplicación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../manejo_base.html">Manejo de la base de datos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../verifica_campos.html">Módulo para verificacion de campos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../aux_modelo.html">Auxiliares del módulo modelo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../aux_vista.html">Auxiliares del módulo vista</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Manual de la aplicación:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">1. Descripcion general</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage.html#pantalla-principal-sus-componentes">2. Pantalla principal - Sus componentes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage.html#manual-de-uso">3. Manual de uso.</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">UTN - Python Intermedio</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Código de módulo</a></li>
+      <li class="breadcrumb-item active">aux_vista</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Código fuente para aux_vista</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">aux_vista.py:</span>
+<span class="sd">    Contiene funciones auxiliares a la vista, como el seteo de los widgets entry y,</span>
+<span class="sd">    la construcción de la lista para movimiento de toda la información y la función</span>
+<span class="sd">    de cierre de la aplicación.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">tkinter.messagebox</span> <span class="kn">import</span> <span class="n">askokcancel</span>
+
+
+<span class="c1"># ***** MANIPULACION DE DATOS *****</span>
+<div class="viewcode-block" id="AuxVista">
+<a class="viewcode-back" href="../aux_vista.html#aux_vista.AuxVista">[documentos]</a>
+<span class="k">class</span> <span class="nc">AuxVista</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">var_dni</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span>
+        <span class="n">var_cuil</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span>
+        <span class="n">var_nombre</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span>
+        <span class="n">var_apellido</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span>
+        <span class="n">var_domicilio</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span>
+        <span class="n">var_fnacimiento</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span>
+        <span class="n">var_falta</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span>
+        <span class="n">var_art</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span>
+        <span class="n">var_obra</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span>
+        <span class="n">var_jornal</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span>
+        <span class="n">var_filtro</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span>
+        <span class="n">l_status</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span>
+        <span class="n">e_dni</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span>
+        <span class="n">e_cuil</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor de la clase que recibe todas las variables necesarias</span>
+<span class="sd">        para la operación de los modulos que componen esta clase.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var_dni</span> <span class="o">=</span> <span class="n">var_dni</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var_cuil</span> <span class="o">=</span> <span class="n">var_cuil</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var_nombre</span> <span class="o">=</span> <span class="n">var_nombre</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var_apellido</span> <span class="o">=</span> <span class="n">var_apellido</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var_domicilio</span> <span class="o">=</span> <span class="n">var_domicilio</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var_fnacimiento</span> <span class="o">=</span> <span class="n">var_fnacimiento</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var_falta</span> <span class="o">=</span> <span class="n">var_falta</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var_art</span> <span class="o">=</span> <span class="n">var_art</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var_obra</span> <span class="o">=</span> <span class="n">var_obra</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var_jornal</span> <span class="o">=</span> <span class="n">var_jornal</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var_filtro</span> <span class="o">=</span> <span class="n">var_filtro</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">l_status</span> <span class="o">=</span> <span class="n">l_status</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">e_dni</span> <span class="o">=</span> <span class="n">e_dni</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">e_cuil</span> <span class="o">=</span> <span class="n">e_cuil</span>
+
+    <span class="c1"># ----- CREACION DE UNA LISTA PARA MOVIMIENTO DE LOS DATOS -----</span>
+<div class="viewcode-block" id="AuxVista.create_list">
+<a class="viewcode-back" href="../aux_vista.html#aux_vista.AuxVista.create_list">[documentos]</a>
+    <span class="k">def</span> <span class="nf">create_list</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Se crea una lista con todos los datos del formulario para una más simple manipulación de la información.</span>
+
+<span class="sd">        :returns data_list: La lista con toda la información.</span>
+
+<span class="sd">        :rtype: list[str, int]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">data_list</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var_dni</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var_cuil</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var_nombre</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var_apellido</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var_domicilio</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var_fnacimiento</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var_falta</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var_obra</span><span class="o">.</span><span class="n">get</span><span class="p">()</span><span class="o">.</span><span class="n">capitalize</span><span class="p">(),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var_art</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var_jornal</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span>
+        <span class="p">]</span>
+        <span class="k">return</span> <span class="n">data_list</span></div>
+
+
+    <span class="c1"># ----- SETEO DE LOS ENTRY -----</span>
+<div class="viewcode-block" id="AuxVista.set_entry">
+<a class="viewcode-back" href="../aux_vista.html#aux_vista.AuxVista.set_entry">[documentos]</a>
+    <span class="k">def</span> <span class="nf">set_entry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_list</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Esta función se utiliza para la carga de la información, seleccionada en el treeview o consultada por la búsqueda,</span>
+<span class="sd">        en todo los entry del frame de datos. En esta situación se deshabilitan los campos de DNI y CUIL que no pueden ser modificados.</span>
+<span class="sd">        También se le puede enviar una lista vacia para poder limpiar todos los campos y en esta ocasión se habilitan los entry bloqueados.</span>
+
+<span class="sd">        :param data_list: La lista con toda la información a cargar o vacia para limpiar</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">var_dni</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">data_list</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var_cuil</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">data_list</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var_nombre</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">data_list</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">3</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var_apellido</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">data_list</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">4</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var_domicilio</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">data_list</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">5</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var_fnacimiento</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">data_list</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">6</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var_falta</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">data_list</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">7</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var_obra</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">data_list</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">8</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var_art</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">data_list</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">9</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var_jornal</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">data_list</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">10</span><span class="p">])</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">data_list</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">l_status</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s2">&quot;Ok.&quot;</span><span class="p">,</span> <span class="n">background</span><span class="o">=</span><span class="s2">&quot;#B9F582&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">e_dni</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="s2">&quot;normal&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">e_cuil</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="s2">&quot;normal&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">l_status</span><span class="o">.</span><span class="n">config</span><span class="p">(</span>
+                <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Puede modificar o dar de baja al registro.&quot;</span><span class="p">,</span>
+                <span class="n">background</span><span class="o">=</span><span class="s2">&quot;#B9F582&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">e_dni</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="s2">&quot;disabled&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">e_cuil</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="s2">&quot;disabled&quot;</span><span class="p">)</span></div>
+
+
+    <span class="c1"># ----- FUNCION DE CIERRE DE LA APLICACION -----</span>
+<div class="viewcode-block" id="AuxVista.close_app">
+<a class="viewcode-back" href="../aux_vista.html#aux_vista.AuxVista.close_app">[documentos]</a>
+    <span class="k">def</span> <span class="nf">close_app</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">window</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Función para el cierre de la aplicación, con una ventana emergente que consulta si está seguro de esta operación.</span>
+
+<span class="sd">        :param window: Objeto de tkinter, la ventana principal</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">option</span> <span class="o">=</span> <span class="n">askokcancel</span><span class="p">(</span><span class="s2">&quot;Cerrar la aplicación&quot;</span><span class="p">,</span> <span class="s2">&quot;¿Está seguro que quiere salir?&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">option</span><span class="p">:</span>
+            <span class="n">window</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Derechos de autor 2024, German Fraga.</p>
+  </div>
+
+  Compilado con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    proporcionado por <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,4 +1,4 @@
-2024-03-02 11:50:37.985450 - Se ingreso mal el dato en Dni en alta
-2024-03-02 11:50:48.696415 - Se ingreso mal el dato en CUIL en alta
-2024-03-02 11:53:25.666561 - Se intenta cargar un dni ya existente en la base en Alta
-2024-03-02 11:53:29.298669 - Se intenta cargar un dni ya existente en la base en Alta
+2024-03-03 19:13:49.968590 - Se ingreso mal el dato en Búsqueda de dni
+2024-03-03 19:14:27.566243 - Se intenta cargar un dni ya existente en la base en Alta
+2024-03-03 19:14:55.601291 - Se ingreso mal el dato en CUIL en alta
+2024-03-03 19:15:04.175556 - Se ingreso mal el dato en Dni en alta

@@ -9,14 +9,8 @@ import datetime
 
 
 class RegexError(Exception):
-    """
-    Clase para la generación de un propio tipo de error para el manejo de
-    excepciones en el control del regex de los campos.
-    Genera un un log con la información del error.
-    """
-
-    BASE_DIR = os.getcwd() + os.sep
-    ruta = BASE_DIR + "log.txt"
+    BASE_DIR = os.path.dirname((os.path.abspath(__file__)))
+    ruta = os.path.join(BASE_DIR, "log.txt")
 
     def __init__(self, detalle: str) -> None:
         self.detalle = detalle
@@ -35,18 +29,8 @@ class RegexError(Exception):
 
 
 class RegexCampos:
-    """
-    Clase para el control de un regex y un dato.
-    """
 
     def __init__(self, codigo: str, data: str, funcion: str) -> None:
-        """
-        Constructor de la clase.
-
-        :param codigo: String con la clave del regex
-        :param data: String con el dato a corroborar
-        :param funcion: String con la ubicacion desde donde se instancia
-        """
         self.codigo = codigo
         self.data = data
         self.funcion = funcion
